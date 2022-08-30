@@ -1,4 +1,4 @@
-/* This example requires Tailwind CSS v2.0+ */
+
 export default function CallToAction() {
   return (
     <div className="bg-gray-900 mb-36">
