@@ -1,12 +1,20 @@
 
+import Content from './components/Content';
 import Header from './components/header';
-import Landing from './components/pages/Landing';
-
+import Testimonial from './components/Testimonials';
+import Pricing from './components/Pricing'
+import Footer from './components/Footer';
+import CallToAction from './components/CallToAction';
 function App() {
   return (
     <div className="App">
       <Header/>
-      <Landing />
+      <Content />
+      <Pricing />
+      <Testimonial />
+      <CallToAction />
+      
+      <Footer />
     </div>
   );
 }

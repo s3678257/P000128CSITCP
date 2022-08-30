@@ -1,5 +1,4 @@
 import React from 'react'
-import Pricing from '../Pricing'
 const Landing = () => {
   return (
     <div className="hero">
@@ -50,7 +49,7 @@ const Landing = () => {
         </h4>
         <button>Learn More</button>
       </div>
-      <Pricing />
+      
     </div>
   )
 }
