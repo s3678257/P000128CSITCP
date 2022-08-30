@@ -8,6 +8,7 @@ import {
   ShoppingBagIcon,
   XIcon,
 } from "@heroicons/react/outline"
+import { useNavigate } from "react-router-dom"
 
 const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"]
 const navigation = {
@@ -24,9 +25,15 @@ const navigation = {
         
       ],
     },
+    {
+      name: "Contact",
+      featured: [
+        
+      ],
+    },
   ],
   pages: [
-    { name: "Contact", href: "#" },
+    { name: "", href: "#" },
     
   ],
 }
@@ -37,7 +44,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-
+  const nav = useNavigate()
   return (
     <div className="bg-white">
       {/* Mobile menu */}
@@ -84,61 +91,12 @@ export default function Navbar() {
               <Tab.Group as="div" className="mt-2">
                 <div className="border-b border-gray-200">
                   <Tab.List className="-mb-px flex px-4 space-x-8">
-                    {navigation.categories.map((category) => (
-                      <Tab
-                        key={category.name}
-                        className={({ selected }) =>
-                          classNames(
-                            selected
-                              ? "text-indigo-600 border-indigo-600"
-                              : "text-gray-900 border-transparent",
-                            "flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium"
-                          )
-                        }
-                      >
-                        {category.name}
-                      </Tab>
-                    ))}
+                    
+                   
+                  
                   </Tab.List>
                 </div>
-                <Tab.Panels as={Fragment}>
-                  {navigation.categories.map((category) => (
-                    <Tab.Panel
-                      key={category.name}
-                      className="px-4 py-6 space-y-12"
-                    >
-                      <div className="grid grid-cols-2 gap-x-4 gap-y-10">
-                        {category.featured.map((item) => (
-                          <div key={item.name} className="group relative">
-                            <div className="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                              <img
-                                src={item.imageSrc}
-                                alt={item.imageAlt}
-                                className="object-center object-cover"
-                              />
-                            </div>
-                            <a
-                              href={item.href}
-                              className="mt-6 block text-sm font-medium text-gray-900"
-                            >
-                              <span
-                                className="absolute z-10 inset-0"
-                                aria-hidden="true"
-                              />
-                              {item.name}
-                            </a>
-                            <p
-                              aria-hidden="true"
-                              className="mt-1 text-sm text-gray-500"
-                            >
-                              Shop now
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </Tab.Panel>
-                  ))}
-                </Tab.Panels>
+                
               </Tab.Group>
 
               <div className="border-t border-gray-200 py-6 px-4 space-y-6">
@@ -281,7 +239,9 @@ export default function Navbar() {
               <div className="border-b border-gray-200">
                 <div className="h-16 flex items-center justify-between">
                   {/* Logo (lg+) */}
-                  <div className="hidden lg:flex-1 lg:flex lg:items-center">
+                  <div onClick={() => {
+                    nav('/')
+                  }} className="hidden lg:flex-1 lg:flex lg:items-center">
                     <a href="#">
                       <span className="sr-only">Workflow</span>
                       <img
@@ -297,11 +257,20 @@ export default function Navbar() {
                     <Popover.Group className="px-4 bottom-0 inset-x-0">
                       <div className="h-full flex justify-center space-x-8">
                         {navigation.categories.map((category) => (
-                          <Popover key={category.name} className="flex">
+                          <Popover  key={category.name} className="flex">
                             {({ open }) => (
                               <>
                                 <div className="relative flex">
                                   <Popover.Button
+                                  onClick={() => {
+                            if(category.name === "About") {
+                              nav('about')
+                            } else if ( category.name === "Courses") {
+                              nav('courses')
+                            } else if (category.name === "Contact") {
+                              nav('contact')
+                            }
+                          }}
                                     className={classNames(
                                       open
                                         ? "border-indigo-600 text-indigo-600"

@@ -1,19 +1,24 @@
 
-import Content from './components/Content';
 import Header from './components/header';
-import Testimonial from './components/Testimonials';
-import Pricing from './components/Pricing'
 import Footer from './components/Footer';
-import CallToAction from './components/CallToAction';
+import Landing from './components/pages/Landing';
+import { Routes, Route } from 'react-router-dom';
+import About from './components/pages/About'
+import Contact from './components/pages/Contact'
+import Courses from './components/pages/Courses'
+
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Content />
-      <Pricing />
-      <Testimonial />
-      <CallToAction />
+      <Header />
+      <Routes>
+        <Route path='/' element={<Landing/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/courses' element={<Courses/>}/>
+      </Routes>
       
+
       <Footer />
     </div>
   );
