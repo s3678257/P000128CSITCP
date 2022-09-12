@@ -1,21 +1,17 @@
-import React from 'react'
-import Content from '../Content'
-import Pricing from '../Pricing'
-import Testimonial from '../Testimonials'
-import CallToAction from '../CallToAction'
+import React from "react"
+import Content from "../Content"
+import Pricing from "../Pricing"
+import Testimonial from "../Testimonials"
+import CallToAction from "../CallToAction"
+import Hero from "../Hero"
 const Landing = () => {
   return (
-   
     <>
-  
-    
-    <Content />
+      <Hero />
+      <Content />
       <Pricing />
       <Testimonial />
       <CallToAction />
-    
-    
-   
     </>
   )
 }
