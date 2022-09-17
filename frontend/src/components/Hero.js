@@ -14,19 +14,18 @@ export default function Hero() {
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
               <h1>
                 <span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 sm:text-base lg:text-sm xl:text-base">
-                  Coming soon
+                  You are invited to...
                 </span>
                 <span className="mt-1 block text-4xl tracking-tight font-extrabold sm:text-5xl xl:text-6xl">
                   <span className="block text-gray-900">
-                    Content goes here
+                    to go on a journey with your
                   </span>
-                  <span className="block text-gray-900">Coming soon...</span>
+                  <span className="block text-gray-900">SUPERCOUNSCIOUS TEEN!</span>
                 </span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-                lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-                fugiat aliqua ad ad non deserunt sunt.
+                A MINDSET FOR TEENS that will create healthy habits, compassion, and sound relationships!
+                A complete system for you and your teen to expand, explore and enjoy together.
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
                 <p className="text-base font-medium text-gray-900">
