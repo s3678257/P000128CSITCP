@@ -2,6 +2,7 @@ import aboutImg from '../../img2.jpg'
 
 export default function About() {
   return (
+    
     <div className="relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20">
         <div className="max-w-3xl mx-auto">
