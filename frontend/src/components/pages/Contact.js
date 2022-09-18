@@ -1,15 +1,33 @@
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Switch } from "@headlessui/react"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ")
 }
-
 export default function Contact() {
+  const firstNameRef = useRef();
+  const lastNameRef = useRef(); 
+  const emailRef = useRef(); 
+  const phoneRef = useRef(); 
+  const messageRef = useRef(); 
+  const agreedRef = useRef();
+  const countryRef = useRef(); 
 
   const [agreed, setAgreed] = useState(false)
-
+  // submit  
+  const handleSubmit = (e)=>{
+    var params = {
+      firstName: firstNameRef.current.value,
+      lastName: lastNameRef.current.value,
+      email: emailRef.current.value,
+      country: countryRef.current.value,
+      phone: phoneRef.current.value,
+      message: messageRef.current.value,
+      agreed: agreed
+    } 
+    console.log(params)
+  } 
   return (
     <div className="bg-white py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
       <div className="relative max-w-xl mx-auto">
@@ -94,10 +112,7 @@ export default function Contact() {
 
         </div>
         <div className="mt-12">
-          <form
-            action="#"
-            method="POST"
-            className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+          <form className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
           >
             {/**First Name */}
             <div>
@@ -108,7 +123,7 @@ export default function Contact() {
                 First name
               </label>
               <div className="mt-1">
-                <input
+                <input ref={firstNameRef}
                   type="text"
                   name="first-name"
                   id="first-name"
@@ -126,7 +141,7 @@ export default function Contact() {
                 Last name
               </label>
               <div className="mt-1">
-                <input
+                <input ref={lastNameRef}
                   type="text"
                   name="last-name"
                   id="last-name"
@@ -144,7 +159,7 @@ export default function Contact() {
                 Email
               </label>
               <div className="mt-1">
-                <input
+                <input ref={emailRef}
                   id="email"
                   name="email"
                   type="email"
@@ -169,7 +184,7 @@ export default function Contact() {
                   <label htmlFor="country" className="sr-only">
                     Country
                   </label>
-                  <select
+                  <select  ref={countryRef}
                     id="country"
                     name="country"
                     className="h-full py-0 pl-4 pr-8 border-transparent bg-transparent text-gray-500 focus:ring-gray-500 focus:border-gray-500 rounded-md"
@@ -177,13 +192,15 @@ export default function Contact() {
                     <option>US</option>
                     <option>EU</option>
                     <option>CA</option>
-                    {/* <option>CA</option> */}
-                    {/* <option>EU</option> */}
+                    <option>AU</option>
+                    <option>UK</option>
+                    
+                    {/* <option>Country</option> */}
                   </select>
                 </div>
 
                 {/**Client input their number */}
-                <input
+                <input ref={phoneRef}
                   type="text"
                   name="phone-number"
                   id="phone-number"
@@ -203,7 +220,7 @@ export default function Contact() {
                 Message
               </label>
               <div className="mt-1">
-                <textarea
+                <textarea ref={messageRef}
                   id="message"
                   name="message"
                   rows={4}
@@ -215,7 +232,7 @@ export default function Contact() {
             <div className="sm:col-span-2">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
-                  <Switch
+                  <Switch ref={agreedRef}
                     checked={agreed}
                     onChange={setAgreed}
                     className={classNames(
@@ -248,10 +265,11 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+
+            {/**submit button */}
             <div className="sm:col-span-2">
               
-              <button
-                type="submit"
+              <button type="button" onClick={handleSubmit}
                 className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-900"
               >
                 Submit
