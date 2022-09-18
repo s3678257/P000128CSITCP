@@ -22,7 +22,7 @@ export default function Contact() {
           aria-hidden="true"
         >
           <defs>
-            <pattern
+            <pattern 
               id="85737c0e-0916-41d7-917f-596dc7edfa27"
               x={0}
               y={0}
@@ -79,14 +79,19 @@ export default function Contact() {
             fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)"
           />
         </svg>
+        
         <div className="text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             Contact me
-          </h2>
+          </h2 /*The client contact details for email*/>
           <p className="mt-4 text-lg leading-6 text-gray-500">
-            Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat
-            massa dictumst amet. Sapien tortor lacus arcu.
+          Email: jpronga@gmail.com
           </p>
+           {/**Contact title */}
+          <p className="mt-4 text-lg leading-6 text-gray-500">
+          We will get back to you.
+          </p>
+
         </div>
         <div className="mt-12">
           <form
@@ -94,6 +99,7 @@ export default function Contact() {
             method="POST"
             className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
           >
+            {/**First Name */}
             <div>
               <label
                 htmlFor="first-name"
@@ -111,6 +117,7 @@ export default function Contact() {
                 />
               </div>
             </div>
+            {/**Last Name */}
             <div>
               <label
                 htmlFor="last-name"
@@ -128,7 +135,7 @@ export default function Contact() {
                 />
               </div>
             </div>
-            
+            {/**Client Email */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="email"
@@ -146,6 +153,8 @@ export default function Contact() {
                 />
               </div>
             </div>
+
+            {/**Client Phone Number */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="phone-number"
@@ -153,6 +162,8 @@ export default function Contact() {
               >
                 Phone Number
               </label>
+
+              {/**Clients Country */}
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 flex items-center">
                   <label htmlFor="country" className="sr-only">
@@ -164,10 +175,14 @@ export default function Contact() {
                     className="h-full py-0 pl-4 pr-8 border-transparent bg-transparent text-gray-500 focus:ring-gray-500 focus:border-gray-500 rounded-md"
                   >
                     <option>US</option>
+                    <option>EU</option>
+                    <option>CA</option>
                     {/* <option>CA</option> */}
                     {/* <option>EU</option> */}
                   </select>
                 </div>
+
+                {/**Client input their number */}
                 <input
                   type="text"
                   name="phone-number"
@@ -178,6 +193,8 @@ export default function Contact() {
                 />
               </div>
             </div>
+
+            {/**Clients input message */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="message"
@@ -237,7 +254,7 @@ export default function Contact() {
                 type="submit"
                 className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-900"
               >
-                Let's talk
+                Submit
               </button>
 
               
