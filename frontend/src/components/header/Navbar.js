@@ -205,8 +205,8 @@ export default function Example() {
                       <span className="sr-only">Workflow</span>
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                        alt=""
+                        // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=gray&shade=600"
+                        alt="logo"
                       />
                     </Link>
                   </div>

@@ -1,7 +1,7 @@
 import path from "path"
 import express from "express"
 import dotenv from "dotenv"
-import connectDB from './config.js'
+import connectDB from './config/config.js'
 import colors from "colors"
 
 import userRoutes from "./routes/userRoutes.js"
