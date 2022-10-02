@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import users from "./data/user.js"
 import User from "./models/userModel.js"
 import colors from "colors"
-import connectDB from "./config.js"
+import connectDB from "./config/config.js"
 
 dotenv.config()
 //connection to MongoDB
