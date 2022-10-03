@@ -1,7 +1,9 @@
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react"
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline"
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "../../actions/userActions"
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"]
 const navigation = {
   pages: [{ name: "About" }, { name: "Courses" }, { name: "Contact" }],
@@ -9,6 +11,23 @@ const navigation = {
 
 export default function Example() {
   const [open, setOpen] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin === true) {
+      setIsAdmin(true)
+    } else {
+      setIsAdmin(false)
+    }
+  }, [userInfo])
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   return (
     <div className="bg-white">
@@ -178,18 +197,43 @@ export default function Example() {
               </form>
 
               <div className="flex items-center space-x-6">
-                <Link
-                  to="signin"
-                  className="text-sm font-medium text-white hover:text-gray-100"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  to="registration"
-                  className="text-sm font-medium text-white hover:text-gray-100"
-                >
-                  Create an account
-                </Link>
+                {userInfo ? (
+                  <>
+                    {isAdmin ? (
+                      <>
+                        {" "}
+                        <Link
+                          to="adminpanel"
+                          className="text-sm font-medium text-white hover:text-gray-100"
+                        >
+                          Admin Panel
+                        </Link>
+                      </>
+                    ) : <> </>}
+
+                    <button
+                      onClick={logoutHandler}
+                      className="text-sm font-medium text-white hover:text-gray-100"
+                    >
+                      Log out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="signin"
+                      className="text-sm font-medium text-white hover:text-gray-100"
+                    >
+                      Sign in
+                    </Link>
+                    <Link
+                      to="registration"
+                      className="text-sm font-medium text-white hover:text-gray-100"
+                    >
+                      Create an account
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
