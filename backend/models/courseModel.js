@@ -12,10 +12,13 @@ const courseSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    isAdmin: {
-      type: Boolean,
+    image: {
+      type: String,
       required: true,
-      default: false,
+    },
+    description: {
+      type: String,
+      required: true,
     },
   },
   {
