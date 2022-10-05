@@ -5,7 +5,7 @@ import Course from "../models/courseModel.js"
 // @route POST /courses
 // @access Public
 const addCourse = asyncHandler(async (req, res) => {
-    const { name, price } = req.body
+    const { name, price, image, description } = req.body
   
     const courseExists = await User.findOne({ name })
   
@@ -17,6 +17,8 @@ const addCourse = asyncHandler(async (req, res) => {
     const course = await Course.create({
       name,
       price,
+      image,
+      description
     })
   
     if (course) {
@@ -24,7 +26,8 @@ const addCourse = asyncHandler(async (req, res) => {
         _id: course._id,
         name: course.name,
         price: course.price,
-        isAdmin: course.isAdmin,
+        image: course.image,
+        description: course.description,
         token: generateToken(course._id),
       })
     } else {
@@ -44,7 +47,8 @@ const getCourseProfile = asyncHandler(async (req, res) => {
         _id: course._id,
         name: course.name,
         price: course.price,
-        isAdmin: course.isAdmin,
+        imgae:course.image,
+        description: course.description,
       })
     } else {
       res.status(404)
@@ -61,13 +65,16 @@ const updateCourseProfile = asyncHandler(async (req, res) => {
     if (course) {
         course.name = req.body.name || course.name
         course.price = req.body.price || course.price
+        course.image = req.body.image || course.image
+        course.description = req.body.description || course.description
       const updatedCourse = await course.save()
   
       res.json({
         _id: updatedCourse._id,
         name: updatedCourse.name,
         price: updatedCourse.price,
-        isAdmin: updatedCourse.isAdmin,
+        image:updatedCourse.image,
+        description: updatedCourse.description,
        
       })
     } else {
@@ -107,7 +114,8 @@ const updateCourse = asyncHandler(async (req, res) => {
     if (course) {
       course.name = req.body.name || course.name
       course.price = req.body.price || course.price
-      course.isAdmin = req.body.isAdmin
+      course.image = req.body.image || course.image
+      course.description = req.body.description || course.description
   
       const updatedCourse = await course.save()
   
@@ -115,7 +123,8 @@ const updateCourse = asyncHandler(async (req, res) => {
         _id: updatedCourse._id,
         name: updatedCourse.name,
         price: updatedCourse.price,
-        isAdmin: updatedUser.isAdmin,
+        image:updatedCourse.image,
+        description: updatedCourse.description,
       })
     } else {
       res.status(404)
