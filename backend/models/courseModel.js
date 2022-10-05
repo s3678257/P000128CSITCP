@@ -10,7 +10,6 @@ const courseSchema = mongoose.Schema(
     price: {
       type: String,
       required: true,
-      unique: true,
     },
     image: {
       type: String,

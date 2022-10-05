@@ -7,7 +7,7 @@ import Course from "../models/courseModel.js"
 const addCourse = asyncHandler(async (req, res) => {
     const { name, price, image, description } = req.body
   
-    const courseExists = await User.findOne({ name })
+    const courseExists = await Course.findOne({ name })
   
     if (courseExists) {
       res.status(400)
@@ -28,7 +28,7 @@ const addCourse = asyncHandler(async (req, res) => {
         price: course.price,
         image: course.image,
         description: course.description,
-        token: generateToken(course._id),
+  
       })
     } else {
       res.status(400)
