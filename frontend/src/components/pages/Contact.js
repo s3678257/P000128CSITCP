@@ -99,14 +99,11 @@ export default function Contact() {
         </svg>
         
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
             Contact me
-          </h2 /*The client contact details for email*/>
-          <p className="mt-4 text-lg leading-6 text-gray-500">
-          Email: jpronga@gmail.com
-          </p>
+          </h2>    
            {/**Contact title */}
-          <p className="mt-4 text-lg leading-6 text-gray-500">
+          <p className="mt-4 text-lg leading-6 text-black-500">
           We will get back to you.
           </p>
 
@@ -128,7 +125,8 @@ export default function Contact() {
                   name="first-name"
                   id="first-name"
                   autoComplete="given-name"
-                  className="py-3 px-4 block w-full shadow-sm focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md"
+                  placeholder="First Name"
+                  className="py-3 px-4 block w-full shadow-md focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -146,7 +144,8 @@ export default function Contact() {
                   name="last-name"
                   id="last-name"
                   autoComplete="family-name"
-                  className="py-3 px-4 block w-full shadow-sm focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md"
+                  placeholder="Last Name"
+                  className="py-3 px-4 block w-full shadow-md focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -164,7 +163,8 @@ export default function Contact() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  className="py-3 px-4 block w-full shadow-sm focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md"
+                  placeholder="Enter you Email"
+                  className="py-3 px-4 block w-full shadow-md focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -177,6 +177,7 @@ export default function Contact() {
               >
                 Phone Number
               </label>
+              
 
               {/**Clients Country */}
               <div className="mt-1 relative rounded-md shadow-sm">
@@ -205,7 +206,7 @@ export default function Contact() {
                   name="phone-number"
                   id="phone-number"
                   autoComplete="tel"
-                  className="py-3 px-4 block w-full pl-20 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md"
+                  className="py-3 px-4 block w-full pl-20 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md shadow-md"
                   placeholder="+1 (555) 987-6543"
                 />
               </div>
@@ -224,7 +225,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   rows={4}
-                  className="py-3 px-4 block w-full shadow-sm focus:ring-gray-500 focus:border-gray-500 border border-gray-300 rounded-md"
+                  className="py-3 px-4 block w-full shadow-md focus:ring-gray-500 focus:border-gray-500 border border-gray-300 rounded-md"
                   defaultValue={""}
                 />
               </div>
