@@ -4,12 +4,11 @@ export default function CallToAction() {
     <div className="bg-gray-900 mb-36">
       <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-          <span className="block">Lorem ipsum dolor si?</span>
-          <span className="block">Schedule a free consultation.</span>
+          <span className="block">Transform your life through education</span>
+          
         </h2>
         <p className="mt-4 text-lg leading-6 text-indigo-200">
-          Ac euismod vel sit maecenas id pellentesque eu sed consectetur.
-          Malesuada adipiscing sagittis vel nulla nec.
+        Teens around the world will create healthy habits, compassion and good relationships
         </p>
         <a
           href="#"

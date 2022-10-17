@@ -1,4 +1,4 @@
-
+import img4 from '../img4.jpg'
 export default function Example() {
   return (
     <div className="bg-white pt-16 lg:py-24">
@@ -13,7 +13,7 @@ export default function Example() {
               <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                 <img
                   className="object-cover lg:h-full lg:w-full"
-                  src=""
+                  src={img4}
                   alt="Customer picture here"
                 />
               </div>
@@ -32,17 +32,16 @@ export default function Example() {
                     <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                   </svg>
                   <p className="mt-6 text-2xl font-medium text-gray-900">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    urna nulla vitae laoreet augue. Amet feugiat est integer
-                    dolor auctor adipiscing nunc urna, sit.
+                  Overcome limiting beliefs, Create daily habits to set an optimal mindset, 
+                  Build Resilience, Your teen becomes a leader, Use the power of your Superconscious Mind
                   </p>
                 </div>
                 <footer className="mt-6">
                   <p className="text-base font-medium text-gray-900">
-                    Customer Name
+                  Alice
                   </p>
                   <p className="text-base font-medium text-gray-900">
-                    What they bought
+                  Master the tools & skills to become Superconscious Teens & Moms 
                   </p>
                 </footer>
               </blockquote>

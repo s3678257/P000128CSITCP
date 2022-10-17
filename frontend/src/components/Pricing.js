@@ -6,7 +6,7 @@ const pricing = {
     {
       title: "FreelancerIntroduction to Superconscious Teens ",
       price: 200,
-      frequency: "",
+      frequency: "4 weeks",
       description: "Lorem ipsum ",
       features: [
         "Sagittis scelerisque nulla cursus",
@@ -20,13 +20,13 @@ const pricing = {
     {
       title: "Master the tools & skills to become ST&M ",
       price: 600,
-      frequency: "",
+      frequency: "12 weeks",
       description: "Lorem ipsum ",
       features: [
-        "Sagittis scelerisque nulla cursus",
-        "Laoreet sem estphasellus eu proin massa",
-        "scelerisque nulla cursus",
-        "Mi a platea auctor mi.",
+        "30 min. live session every Monday to review goals for the week.",
+        "Total of 24 recorded sessions. 12 one hour for moms & 12 thirty min. for teens",
+        "Worksheets to guide you and your teen through the creation process.",
+        "Recorded semi- personalized visualizations, meditations and transformation tools.",
       ],
       cta: "Join Now",
       mostPopular: true,
@@ -34,7 +34,7 @@ const pricing = {
     {
       title: "Work one on one to loream ipsum edent ",
       price: 3000,
-      frequency: "",
+      frequency: "12 weeks",
       description: "Lorem ipsum ",
       features: [
         "Sagittis scelerisque nulla cursus",
@@ -59,7 +59,7 @@ export default function Pricing() {
         Let me help you
       </h2>
       <p className="mt-6 max-w-2xl text-xl text-gray-500">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis saepe itaque eveniet sunt libero beatae architecto asperiores aperiam et placeat?
+      We offer different kinds of course options
       </p>
 
       {/* Tiers */}

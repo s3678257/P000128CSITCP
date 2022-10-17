@@ -1,4 +1,4 @@
-
+import img3 from '../img3.jpg'
 
 
 
@@ -14,18 +14,19 @@ export default function Hero() {
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
               <h1>
                 <span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 sm:text-base lg:text-sm xl:text-base">
-                  You are invited to...
+                Jennifer Pronga
                 </span>
                 <span className="mt-1 block text-4xl tracking-tight font-extrabold sm:text-5xl xl:text-6xl">
                   <span className="block text-gray-900">
-                    to go on a journey with your
+                  Superconscious Coach
                   </span>
-                  <span className="block text-gray-900">SUPERCOUNSCIOUS TEEN!</span>
+                  
                 </span>
+                {/** The content title here */}
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                A MINDSET FOR TEENS that will create healthy habits, compassion, and sound relationships!
-                A complete system for you and your teen to expand, explore and enjoy together.
+              You are invited to go on a journey with your
+              SUPERCOUNSCIOUS TEEN!
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
                 <p className="text-base font-medium text-gray-900">
@@ -107,9 +108,9 @@ export default function Hero() {
                 >
                   <span className="sr-only">Watch our video to learn more</span>
                   <img
-                    className="w-full"
-                    src="../../img2.jpg"
-                    alt="img or video from jennifer"
+                    className="w-full h-full"
+                    src={img3}
+                    alt="Pictures here"
                   />
                   <div
                     className="absolute inset-0 w-full h-full flex items-center justify-center"
