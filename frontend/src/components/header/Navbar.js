@@ -1,9 +1,8 @@
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useState } from "react"
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react"
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline"
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { logout } from "../../actions/userActions"
+import Logo from '../../Logo.svg'
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"]
 const navigation = {
   pages: [{ name: "About" }, { name: "Courses" }, { name: "Contact" }],
@@ -11,23 +10,6 @@ const navigation = {
 
 export default function Example() {
   const [open, setOpen] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const dispatch = useDispatch()
-
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
-
-  useEffect(() => {
-    if (userInfo && userInfo.isAdmin === true) {
-      setIsAdmin(true)
-    } else {
-      setIsAdmin(false)
-    }
-  }, [userInfo])
-
-  const logoutHandler = () => {
-    dispatch(logout())
-  }
 
   return (
     <div className="bg-white">
@@ -197,43 +179,18 @@ export default function Example() {
               </form>
 
               <div className="flex items-center space-x-6">
-                {userInfo ? (
-                  <>
-                    {isAdmin ? (
-                      <>
-                        {" "}
-                        <Link
-                          to="adminpanel"
-                          className="text-sm font-medium text-white hover:text-gray-100"
-                        >
-                          Admin Panel
-                        </Link>
-                      </>
-                    ) : <> </>}
-
-                    <button
-                      onClick={logoutHandler}
-                      className="text-sm font-medium text-white hover:text-gray-100"
-                    >
-                      Log out
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      to="signin"
-                      className="text-sm font-medium text-white hover:text-gray-100"
-                    >
-                      Sign in
-                    </Link>
-                    <Link
-                      to="registration"
-                      className="text-sm font-medium text-white hover:text-gray-100"
-                    >
-                      Create an account
-                    </Link>
-                  </>
-                )}
+                <Link
+                  to="signin"
+                  className="text-sm font-medium text-white hover:text-gray-100"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  to="registration"
+                  className="text-sm font-medium text-white hover:text-gray-100"
+                >
+                  Create an account
+                </Link>
               </div>
             </div>
           </div>
@@ -243,14 +200,14 @@ export default function Example() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="border-b border-gray-200">
                 <div className="h-16 flex items-center justify-between">
-                  {/* Logo (lg+) */}
+                  {/* Logo (lg+) 此处可以更换网页端Logo,src更改*/}
                   <div className="hidden lg:flex-1 lg:flex lg:items-center">
                     <Link to="/">
                       <span className="sr-only">Workflow</span>
                       <img
-                        className="h-8 w-auto"
-                        // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=gray&shade=600"
-                        alt="logo"
+                        className="h-20 w-auto"
+                        src={Logo}
+                        alt=""
                       />
                     </Link>
                   </div>
@@ -284,13 +241,13 @@ export default function Example() {
                     </button>
                   </div>
 
-                  {/* Logo (lg-) */}
+                  {/* Logo (lg-) 此处更换移动端Logo*/}
                   <Link to="/" className="lg:hidden">
                     <span className="sr-only">Workflow</span>
                     <img
-                      src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                      src={Logo}
                       alt=""
-                      className="h-8 w-auto"
+                      className="h-20 w-auto"
                     />
                   </Link>
 
