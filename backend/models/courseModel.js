@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs"
 import mongoose from "mongoose"
 
 const courseSchema = mongoose.Schema(
@@ -8,21 +7,21 @@ const courseSchema = mongoose.Schema(
       required: true,
     },
     price: {
+      type: Number,
+      required: true,
+    },
+    description: {
       type: String,
       required: true,
-      unique: true,
     },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
+    image: {
+      type: String,
     },
   },
   {
     timestaps: true,
   }
 )
-
 
 const Course = mongoose.model("Course", courseSchema)
 
