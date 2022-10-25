@@ -13,6 +13,16 @@ import {
   userUpdateReducer
 } from "./reducers/userReducers"
 
+import {
+  courseCreateReducer,
+  courseDetailsReducer,
+  courseListReducer,
+  courseUpdateReducer,
+  courseDeleteReducer,
+} from "./reducers/courseReducers"
+
+
+
 
 const reducer = combineReducers({
 
@@ -23,8 +33,15 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
+  courseCreate: courseCreateReducer,
+  courseDetails: courseDetailsReducer,
+  courseList: courseListReducer,
+  courseUpdate: courseUpdateReducer,
+  courseDelete: courseDeleteReducer,
+
 
 })
+
 
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
