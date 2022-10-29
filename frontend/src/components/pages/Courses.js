@@ -13,6 +13,7 @@ export default function Courses() {
   axios.defaults.baseURL = "http://localhost:8000"
 
   useEffect(() => {
+    
     axios.get("/courses").then((res) => {
       setCourses(res.data)
      

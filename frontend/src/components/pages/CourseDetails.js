@@ -33,6 +33,8 @@ const CourseDetails = () => {
 
   const addToCartHandler = () => {
       dispatch(addToCart(course_id))
+      //find element with shopping-cart-button id and click
+      document.getElementById("shopping-cart-button").click()
   }
 
 

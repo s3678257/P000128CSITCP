@@ -1,28 +1,28 @@
 import { Fragment, useEffect, useState } from "react"
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react"
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../../actions/userActions"
 import { removeFromCart } from "../../actions/cartActions"
-const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"]
+
+const currencies = ["CAD", "USD", "AUD"]
 const navigation = {
   pages: [{ name: "About" }, { name: "Courses" }, { name: "Contact" }],
 }
 
-
 export default function Navbar() {
-  const [cartOpen, setCartOpen] = useState(true)
+  const [cartOpen, setCartOpen] = useState(false)
   const [open, setOpen] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const dispatch = useDispatch()
-  const [viewCart, setViewCart] = useState(false)
+  
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+  const navigate = useNavigate()
 
-
-   const cart = useSelector((state) => state.cart)
-    const { cartItems } = cart
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin === true) {
@@ -36,22 +36,27 @@ export default function Navbar() {
     dispatch(logout())
   }
 
-  const toggleCartHandler = () => {
-    if (viewCart) {
-      setViewCart(false)
-    } else {
-      setViewCart(true)
-    }
-  }
+
 
   const removeItemFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
     console.log(id)
   }
 
-//calculate total price
+  //calculate total price
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0)
 
+  const checkoutHandler = () => {
+    //if user is not logged in, redirect to login page and redirect back to checkout once logged in
+    if (!userInfo) {
+      navigate("/signin?redirect=checkout")
+       setCartOpen(false)
+    } else {
+      navigate("/checkout")
+       setCartOpen(false)
+    }
+   
+  }
 
   return (
     <div className="bg-white">
@@ -178,7 +183,7 @@ export default function Navbar() {
         </Dialog>
       </Transition.Root>
 
-                        {/* CART */}
+      {/* CART */}
       <Transition.Root show={cartOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setCartOpen}>
           <Transition.Child
@@ -244,9 +249,7 @@ export default function Navbar() {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          <a href={item.href}>
-                                            {item.name}
-                                          </a>
+                                          <a href={item.href}>{item.name}</a>
                                         </h3>
                                         <p className="ml-4">{item.price}</p>
                                       </div>
@@ -255,11 +258,13 @@ export default function Navbar() {
                                       </p>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                      
-
                                       <div className="flex">
                                         <button
-                                          onClick={() => removeItemFromCartHandler(item.course)}
+                                          onClick={() =>
+                                            removeItemFromCartHandler(
+                                              item.course
+                                            )
+                                          }
                                           type="button"
                                           className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
@@ -284,13 +289,18 @@ export default function Navbar() {
                           Shipping and taxes calculated at checkout.
                         </p>
                         <div className="mt-6">
-                          <Link
-                            onClick={() => setCartOpen(false)}
-                            to="/checkout"
-                            className="flex items-center justify-center rounded-md border border-transparent bg-gray-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-900"
+                          <button
+                            onClick={checkoutHandler}
+                            className={
+                              //if cart is empty, color is gray
+                              cartItems.length === 0
+                                ? "bg-gray-100 text-gray-500 cursor-not-allowed w-full flex items-center justify-center rounded-md border border-transparent  px-6 py-3 text-base font-medium  shadow-sm  "
+                                : " w-full flex items-center justify-center rounded-md border border-transparent bg-gray-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-900"
+                            }
+                            disabled={cartItems.length === 0}
                           >
                             Checkout
-                          </Link>
+                          </button>
                         </div>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>
@@ -462,7 +472,8 @@ export default function Navbar() {
                       {/* Cart */}
                       <div className="ml-4 flow-root lg:ml-8">
                         <button
-                          onClick={ () => setCartOpen(true)}
+                          id="shopping-cart-button"
+                          onClick={() => setCartOpen(true)}
                           className="group -m-2 p-2 flex items-center"
                         >
                           <ShoppingBagIcon

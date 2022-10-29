@@ -1,28 +1,61 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { useDispatch } from 'react-redux'
 import { logout } from "../../actions/userActions"
 import { Link, useNavigate } from 'react-router-dom'
+import CourseList from '../CourseList'
 
-const navigation = [
-  { name: "Site", route: "/" },
-  { name: "Items", route: "/" },
-  { name: "Analytics", route: "/" },
-  { name: "Users", route: "/" },
-]
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function AdminPanel() {
+  const navigate = useNavigate()
+  const [showItemList, setShowItemList] = useState(false)
+  const [showUserList, setShowUserList] = useState(false)
+  const [showOrderList, setShowOrderList] = useState(false)
+  const [showAnalytics, setShowAnalytics] = useState(false)
+
+  const navigation = [
+    { name: "Site", onClick: () => navigate("/") },
+    { name: "Analytics", onClick: () => {
+      
+      //set everything to false then set the one we want to true
+      setAllFalse()
+      setShowAnalytics(true)
+    } },
+    { name: "Courses",  onClick:  () => {
+       setAllFalse()
+       setShowItemList(true)}
+       },
+
+    {name: "Orders" , onClick:  () => {
+       setAllFalse()
+        setShowOrderList(true)
+      
+    }},
+    { name: "Users", onClick:  () => { 
+      setAllFalse()
+      setShowUserList(true)
+   
+  } },
+     
+  ]
     const disptach = useDispatch()
-    const navigate = useNavigate()
+  
     const logoutHandler = () => {
         disptach(logout())
         navigate('/signin')
     }
 
+    const setAllFalse = () => {
+      setShowItemList(false)
+      setShowUserList(false)
+      setShowOrderList(false)
+      setShowAnalytics(false)
+    }
   return (
     <>
       <div className="min-h-full">
@@ -38,19 +71,19 @@ export default function AdminPanel() {
                     <div className="hidden md:block ">
                       <div className="ml-10 flex items-baseline space-x-4 ">
                         {navigation.map((item) => (
-                          <Link
+                          <div
                             key={item.name}
-                            to={item.route}
+                            onClick={item.onClick}
                             
                             className={classNames(
                             
                                  "text-gray-300 hover:bg-gray-700 hover:text-white",
-                              "px-3 py-2 rounded-md text-sm font-medium"
+                              "px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
                             )}
                            
                           >
                             {item.name}
-                          </Link>
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -78,6 +111,7 @@ export default function AdminPanel() {
                 <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
+                     
                       key={item.name}
                       as="a"
                       href={item.href}
@@ -109,7 +143,12 @@ export default function AdminPanel() {
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             {/* Replace with your content */}
             <div className="px-4 py-6 sm:px-0">
-              <div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
+              <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 bg-gray-100">
+                {showItemList && <CourseList />}
+                {showUserList && <h1>USER LIST</h1>}
+                {showOrderList && <h1>ORDER LIST</h1>}
+                {showAnalytics && <h1>ANALYTICS</h1>}
+              </div>
             </div>
             {/* /End replace */}
           </div>
