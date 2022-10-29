@@ -20,12 +20,17 @@ import {
   courseUpdateReducer,
   courseDeleteReducer,
 } from "./reducers/courseReducers"
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderListMyReducer,
+  orderListReducer,
 
+} from "./reducers/orderReducers"
 
 
 
 const reducer = combineReducers({
-
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -39,8 +44,10 @@ const reducer = combineReducers({
   courseUpdate: courseUpdateReducer,
   courseDelete: courseDeleteReducer,
   cart: cartReducer,
-
-
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderListMy: orderListMyReducer,
+  orderList: orderListReducer,
 })
 
 

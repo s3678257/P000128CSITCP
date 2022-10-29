@@ -6,7 +6,7 @@ import colors from "colors"
 import cors from "cors"
 import userRoutes from "./routes/userRoutes.js"
 import courseRoutes from "./routes/courseRoutes.js"
-
+import orderRoutes from "./routes/orderRoutes.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
 
 
@@ -23,7 +23,7 @@ app.use(express.json())
 
 app.use("/users", userRoutes)
 app.use("/courses", courseRoutes)
-
+app.use("/orders", orderRoutes)
 
 
 

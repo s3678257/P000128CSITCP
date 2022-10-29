@@ -5,6 +5,7 @@ import { CheckCircleIcon, TrashIcon } from "@heroicons/react/solid"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { removeFromCart } from "../../actions/cartActions"
+import { createOrder } from "../../actions/orderActions"
 
 
 const deliveryMethods = [
@@ -38,16 +39,43 @@ export default function Checkout() {
     dispatch(removeFromCart(id))
   }
 
+   const addDecimals = (num) => {
+     return (Math.round(num * 100) / 100).toFixed(2)
+   }
   //get total price
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0)
+  const subTotalPrice = addDecimals(
+    cartItems.reduce((acc, item) => acc + item.price, 0)
+  )
+  const taxPrice = addDecimals(subTotalPrice * 0.1)
+  const totalPrice = addDecimals(Number(subTotalPrice) + Number(taxPrice))
 
+  
+  
+  const createOrderHandler = () => {
+    //if user is not logged in, redirect to login page
+    if (!userInfo) {
+      navigate("/login")
+    } else {
+      console.log("create order")
+      dispatch(
+        createOrder({
+          orderItems: cart.cartItems,
+          itemsPrice: subTotalPrice,
+          taxPrice: taxPrice,
+          totalPrice: totalPrice,
+        })
+      )
+      navigate("/")
+    }
+    
+  }
 
   return (
     <div className="bg-gray-50">
       <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Checkout</h2>
 
-        <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
           <div>
             <div>
               <h2 className="text-lg font-medium text-gray-900">
@@ -507,25 +535,23 @@ export default function Checkout() {
               <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">{totalPrice}</dd>
+                  <dd className="text-sm font-medium text-gray-900">${subTotalPrice}</dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Taxes</dt>
-                  <dd className="text-sm font-medium text-gray-900">TAXES HERE</dd>
+                  <dd className="text-sm font-medium text-gray-900">${taxPrice}</dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                   <dt className="text-base font-medium">Total</dt>
                   <dd className="text-base font-medium text-gray-900">
-                    TOTAL HERE
+                    ${totalPrice}
                   </dd>
                 </div>
               </dl>
 
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <button
-                    onClick={ () => {
-                        navigate('/thankyou')
-                    }}
+                    onClick={ createOrderHandler }
                   type="submit"
                   className="w-full bg-gray-900 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                 >
@@ -534,7 +560,7 @@ export default function Checkout() {
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   )
