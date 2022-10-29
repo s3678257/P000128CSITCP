@@ -4,14 +4,12 @@ import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../../actions/userActions"
-import Cart from "../pages/Cart"
+import { removeFromCart } from "../../actions/cartActions"
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"]
 const navigation = {
   pages: [{ name: "About" }, { name: "Courses" }, { name: "Contact" }],
 }
-const products = [
-  // More products...
-]
+
 
 export default function Navbar() {
   const [cartOpen, setCartOpen] = useState(true)
@@ -21,6 +19,10 @@ export default function Navbar() {
   const [viewCart, setViewCart] = useState(false)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+
+   const cart = useSelector((state) => state.cart)
+    const { cartItems } = cart
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin === true) {
@@ -41,6 +43,15 @@ export default function Navbar() {
       setViewCart(true)
     }
   }
+
+  const removeItemFromCartHandler = (id) => {
+    dispatch(removeFromCart(id))
+    console.log(id)
+  }
+
+//calculate total price
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0)
+
 
   return (
     <div className="bg-white">
@@ -167,6 +178,7 @@ export default function Navbar() {
         </Dialog>
       </Transition.Root>
 
+                        {/* CART */}
       <Transition.Root show={cartOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setCartOpen}>
           <Transition.Child
@@ -218,12 +230,12 @@ export default function Navbar() {
                               role="list"
                               className="-my-6 divide-y divide-gray-200"
                             >
-                              {products.map((product) => (
-                                <li key={product.id} className="flex py-6">
+                              {cartItems.map((item) => (
+                                <li key={item.course} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <img
-                                      src={product.imageSrc}
-                                      alt={product.imageAlt}
+                                      src={item.image}
+                                      alt={item.name}
                                       className="h-full w-full object-cover object-center"
                                     />
                                   </div>
@@ -232,23 +244,22 @@ export default function Navbar() {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          <a href={product.href}>
-                                            {product.name}
+                                          <a href={item.href}>
+                                            {item.name}
                                           </a>
                                         </h3>
-                                        <p className="ml-4">{product.price}</p>
+                                        <p className="ml-4">{item.price}</p>
                                       </div>
                                       <p className="mt-1 text-sm text-gray-500">
-                                        {product.color}
+                                        {item.description}
                                       </p>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">
-                                        Qty {product.quantity}
-                                      </p>
+                                      
 
                                       <div className="flex">
                                         <button
+                                          onClick={() => removeItemFromCartHandler(item.course)}
                                           type="button"
                                           className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
@@ -267,7 +278,7 @@ export default function Navbar() {
                       <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
-                          <p>CART PRICE HERE</p>
+                          <p>{totalPrice}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">
                           Shipping and taxes calculated at checkout.

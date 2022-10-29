@@ -3,11 +3,10 @@ import { useState } from "react"
 import { RadioGroup } from "@headlessui/react"
 import { CheckCircleIcon, TrashIcon } from "@heroicons/react/solid"
 import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { removeFromCart } from "../../actions/cartActions"
 
-const products = [
 
-  // More products...
-]
 const deliveryMethods = [
   {
   }
@@ -23,10 +22,25 @@ function classNames(...classes) {
 }
 
 export default function Checkout() {
+  const dispatch = useDispatch()
     const navigate = useNavigate()
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   )
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
+
+  const removeCartItemHandler = (id) => {
+    dispatch(removeFromCart(id))
+  }
+
+  //get total price
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0)
+
 
   return (
     <div className="bg-gray-50">
@@ -438,12 +452,12 @@ export default function Checkout() {
             <div className="mt-4 bg-white border border-gray-200 rounded-lg shadow-sm">
               <h3 className="sr-only">Items in your cart</h3>
               <ul role="list" className="divide-y divide-gray-200">
-                {products.map((product) => (
-                  <li key={product.id} className="flex py-6 px-4 sm:px-6">
+                {cartItems.map((item) => (
+                  <li key={item.course} className="flex py-6 px-4 sm:px-6">
                     <div className="flex-shrink-0">
                       <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
+                        src={item.image}
+                        alt={item.name}
                         className="w-20 rounded-md"
                       />
                     </div>
@@ -453,22 +467,18 @@ export default function Checkout() {
                         <div className="min-w-0 flex-1">
                           <h4 className="text-sm">
                             <a
-                              href={product.href}
+                              href={item.href}
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
-                              {product.title}
+                              {item.name}
                             </a>
                           </h4>
-                          <p className="mt-1 text-sm text-gray-500">
-                            {product.color}
-                          </p>
-                          <p className="mt-1 text-sm text-gray-500">
-                            {product.size}
-                          </p>
+                        
                         </div>
 
                         <div className="ml-4 flex-shrink-0 flow-root">
                           <button
+                            onClick={() => removeCartItemHandler(item.course)}
                             type="button"
                             className="-m-2.5 bg-white p-2.5 flex items-center justify-center text-gray-400 hover:text-gray-500"
                           >
@@ -480,27 +490,14 @@ export default function Checkout() {
 
                       <div className="flex-1 pt-2 flex items-end justify-between">
                         <p className="mt-1 text-sm font-medium text-gray-900">
-                          {product.price}
+                          {item.price}
                         </p>
 
                         <div className="ml-4">
                           <label htmlFor="quantity" className="sr-only">
                             Quantity
                           </label>
-                          <select
-                            id="quantity"
-                            name="quantity"
-                            className="rounded-md border border-gray-300 text-base font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                            <option value={8}>8</option>
-                          </select>
+                          
                         </div>
                       </div>
                     </div>
@@ -510,11 +507,7 @@ export default function Checkout() {
               <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">ITEM# PRICE</dd>
-                </div>
-                <div className="flex items-center justify-between">
-                  <dt className="text-sm">Shipping</dt>
-                  <dd className="text-sm font-medium text-gray-900">SHIPPING PRICE HERE</dd>
+                  <dd className="text-sm font-medium text-gray-900">{totalPrice}</dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Taxes</dt>

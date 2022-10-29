@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import axios from "axios"
-
+import { addToCart } from "../../actions/cartActions"
+import { useDispatch } from "react-redux"
 
 
 
 
 const CourseDetails = () => {
+  
+  const dispatch = useDispatch()
+  
   //get url
   const location = useLocation()
   const course_id = location.pathname.split("/")[2]
   const [courseDetails, setCourseDetails] = useState({})
   //get course details
+
+
 
   useEffect(() => {
     axios.defaults.baseURL = "http://localhost:8000"
@@ -24,6 +30,11 @@ const CourseDetails = () => {
         console.log(err)
       })
   }, [course_id])
+
+  const addToCartHandler = () => {
+      dispatch(addToCart(course_id))
+  }
+
 
   return (
     <div className="bg-white">
@@ -58,14 +69,15 @@ const CourseDetails = () => {
             </div>
 
             <div className="mt-8 lg:col-span-5">
-              <form>
+            
                 <button
+                onClick={addToCartHandler}
                   type="submit"
                   className="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Add to cart
                 </button>
-              </form>
+         
 
               {/* courseDetails details */}
               <div className="mt-10">

@@ -1,18 +1,48 @@
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
-import { Link } from "react-router-dom"
-
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { addToCart, removeFromCart } from "../../actions/cartActions"
 // import { XmarkIcon } from "@heroicons/react/24/outline"
 
-const products = [
-  // More products...
-]
+
 
 export default function Cart() {
-    
   const [cartOpen, setCartOpen] = useState(true)
 
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const location = useLocation()
 
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1
+
+  const dispatch = useDispatch()
+
+  const cart = useSelector((state) => state.cart)
+
+  const { cartItems } = cart
+
+  //get user state
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+   useEffect(() => {
+     if (id) {
+       dispatch(addToCart(id, qty))
+     }
+   }, [dispatch, id, qty])
+
+   const removeFromCartHandler = (id) => {
+     dispatch(removeFromCart(id))
+   }
+
+   const checkOutHandler = () => {
+     if (userInfo) {
+       navigate("/shipping")
+     } else {
+       navigate("/login?redirect=shipping")
+     }
+   }
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setCartOpen}>
@@ -65,12 +95,12 @@ export default function Cart() {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {products.map((product) => (
-                              <li key={product.id} className="flex py-6">
+                            {cartItems.map((item) => (
+                              <li key={item.course} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
+                                    src={item.image}
+                                    alt={item.name}
                                     className="h-full w-full object-cover object-center"
                                   />
                                 </div>
@@ -79,19 +109,17 @@ export default function Cart() {
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <a href={product.href}>
-                                          {product.name}
+                                        <a href={item.href}>
+                                          {item.name}
                                         </a>
                                       </h3>
-                                      <p className="ml-4">{product.price}</p>
+                                      <p className="ml-4">{item.price}</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                      {product.color}
-                                    </p>
+                                   
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <p className="text-gray-500">
-                                      Qty {product.quantity}
+                                      Qty {item.quantity}
                                     </p>
 
                                     <div className="flex">
@@ -121,8 +149,8 @@ export default function Cart() {
                       </p>
                       <div className="mt-6">
                         <Link
-                        onClick={() => setCartOpen(false)}
-                          to='/checkout'
+                          onClick={() => setCartOpen(false)}
+                          to="/checkout"
                           className="flex items-center justify-center rounded-md border border-transparent bg-gray-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-900"
                         >
                           Checkout
@@ -130,7 +158,7 @@ export default function Cart() {
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
-                          or { " "}
+                          or{" "}
                           <button
                             type="button"
                             className="font-medium text-gray-800 hover:text-gray-500"
