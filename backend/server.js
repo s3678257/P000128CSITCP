@@ -3,7 +3,7 @@ import express from "express"
 import dotenv from "dotenv"
 import connectDB from './config/config.js'
 import colors from "colors"
-
+import cors from "cors"
 import userRoutes from "./routes/userRoutes.js"
 import courseRoutes from "./routes/courseRoutes.js"
 
@@ -16,6 +16,8 @@ connectDB()
 
 const app = express()   
 
+
+app.use(cors())
 app.use(express.json())
 
 

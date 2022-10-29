@@ -1,44 +1,27 @@
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 
 
-
-// const products = [
-//   {
-//     id: 1,
-//     name: "Basic Tee 8-Pack",
-//     href: "#",
-//     price: "$256",
-//     description:
-//       "Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.",
-//     options: "8 colors",
-//     imageSrc:
-//       "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg",
-//     imageAlt:
-//       "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
-//   },
-//   {
-//     id: 2,
-//     name: "Basic Tee",
-//     href: "#",
-//     price: "$32",
-//     description:
-//       "Look like a visionary CEO and wear the same black t-shirt every day.",
-//     options: "Black",
-//     imageSrc:
-//       "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg",
-//     imageAlt: "Front of plain black t-shirt.",
-//   },
-//   // More products...
-// ]
 
 export default function Courses() {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const courseList = useSelector((state) => state.courseList)
-  const {  courses } = courseList
+  const [courses, setCourses] = useState([])
+  //import courses from backend
+  axios.defaults.baseURL = "http://localhost:8000"
+
+  useEffect(() => {
+    axios.get("/courses").then((res) => {
+      setCourses(res.data)
+     
+    }).catch((err) => {
+      console.log(err)
+    }
+    )
+  }, [courses])
+
 
 
 
@@ -51,8 +34,9 @@ export default function Courses() {
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
           {courses.map((course) => (
             <div
-              key={course.id}
-              className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden"
+              key={course._id}
+              className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden cursor-pointer"
+              onClick={ () => navigate(`/courses/${course._id}`)}
             >
               <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
                 <img

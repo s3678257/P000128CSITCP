@@ -12,6 +12,7 @@ import Registration from './components/pages/Registration';
 import AdminPanel from './components/pages/AdminPanel';
 import { BrowserRouter as Router } from "react-router-dom"
 import ThankYou from './components/pages/ThankYou';
+import CourseDetails from './components/pages/CourseDetails';
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
         <Route path='adminpanel' element={<AdminPanel/>}/>
         <Route path='/checkout' element={<Checkout />}/>
         <Route path='/thankyou' element={<ThankYou/>}/>
+        <Route path='/courses/:id' element={<CourseDetails/>}/>
       </Routes>
       
 
