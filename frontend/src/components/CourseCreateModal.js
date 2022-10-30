@@ -2,38 +2,37 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import axios from "axios"
 
-export default function CourseEdit(props) {
+export default function CourseCreateModal(props) {
   const [open, setOpen] = useState(true)
   const name = useRef()
   const description = useRef()
   const price = useRef()
 
-  const cancelButtonRef = useRef(null)
 
-  //get course from id
-  const [course, setCourse] = useState({ ...props.course })
+
 
   //update course
   axios.defaults.baseURL = "http://localhost:8000"
 
-  const updateCourse = () => {
+  const createCourse = () => {
     //add token to header
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`
+    
     axios
-      .put(`/courses/${course._id}`, {
-        name: name.current.value,
-        description: description.current.value,
-        price: price.current.value,
-      })
-      .then((res) => {
-        console.log(res.data)
-        props.refreshTable()
-        //close modal
-        setOpen(false)
-      })
-      .catch((err) => console.log(err))
+        .post(`/courses`, {
+            name: name.current.value,
+            description: description.current.value,
+            price: price.current.value,
+        })
+        .then((res) => {
+            console.log(res.data)
+            props.refreshTable()
+            //close modal
+            setOpen(false)
+        }
+        )
   }
 
   return (
@@ -41,7 +40,7 @@ export default function CourseEdit(props) {
       <Dialog
         as="div"
         className="relative z-10"
-        initialFocus={cancelButtonRef}
+
         onClose={setOpen}
       >
         <Transition.Child
@@ -92,7 +91,7 @@ export default function CourseEdit(props) {
                               ref={name}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder={course.name}
+
                             />
                             <label
                               htmlFor="price"
@@ -104,7 +103,7 @@ export default function CourseEdit(props) {
                               ref={description}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder={course.description}
+
                             />
                             <label
                               htmlFor="price"
@@ -117,7 +116,7 @@ export default function CourseEdit(props) {
                               ref={price}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder={course.price}
+
                             />
                           </div>
                         </div>
@@ -130,7 +129,7 @@ export default function CourseEdit(props) {
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => {
-                      updateCourse()
+                      createCourse()
                       props.setCourseEdit()
                       setOpen(false)
                       setOpen(true)
@@ -146,7 +145,7 @@ export default function CourseEdit(props) {
                       setOpen(false)
                       setOpen(true)
                     }}
-                    ref={cancelButtonRef}
+                 
                   >
                     Cancel
                   </button>

@@ -16,8 +16,8 @@ router
   .get(protect, getCourseDetail)
 router
   .route("/:id")
-  .delete(protect, admin, deleteCourse)
-  .put(protect, admin, updateCourse)
+  .delete(deleteCourse)
+  .put(updateCourse)
   .get( getCourseDetail)
 
 export default router

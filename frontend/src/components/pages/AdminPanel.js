@@ -13,7 +13,7 @@ function classNames(...classes) {
 
 export default function AdminPanel() {
   const navigate = useNavigate()
-  const [showItemList, setShowItemList] = useState(false)
+  const [showCourseList, setShowCourseList] = useState(false)
   const [showUserList, setShowUserList] = useState(false)
   const [showOrderList, setShowOrderList] = useState(false)
   const [showAnalytics, setShowAnalytics] = useState(false)
@@ -22,23 +22,18 @@ export default function AdminPanel() {
     { name: "Site", onClick: () => navigate("/") },
     { name: "Analytics", onClick: () => {
       
-      //set everything to false then set the one we want to true
-      setAllFalse()
-      setShowAnalytics(true)
+      showAnalyticsFunc()
     } },
     { name: "Courses",  onClick:  () => {
-       setAllFalse()
-       setShowItemList(true)}
+       showCourseListFunc()
        },
-
+    },
     {name: "Orders" , onClick:  () => {
-       setAllFalse()
-        setShowOrderList(true)
+       showOrderListFunc()
       
     }},
     { name: "Users", onClick:  () => { 
-      setAllFalse()
-      setShowUserList(true)
+      showUserListFunc()
    
   } },
      
@@ -51,11 +46,32 @@ export default function AdminPanel() {
     }
 
     const setAllFalse = () => {
-      setShowItemList(false)
+      setShowCourseList(false)
       setShowUserList(false)
       setShowOrderList(false)
       setShowAnalytics(false)
     }
+
+    const showCourseListFunc = () => {
+      setAllFalse()
+      setShowCourseList(true)
+    }
+
+    const showUserListFunc = () => {
+      setAllFalse()
+      setShowUserList(true)
+    }
+
+    const showOrderListFunc = () => {
+      setAllFalse()
+      setShowOrderList(true)
+    }
+
+    const showAnalyticsFunc = () => {
+      setAllFalse()
+      setShowAnalytics(true)
+    }
+
   return (
     <>
       <div className="min-h-full">
@@ -74,7 +90,7 @@ export default function AdminPanel() {
                           <div
                             key={item.name}
                             onClick={item.onClick}
-                            
+                            id={item.name}
                             className={classNames(
                             
                                  "text-gray-300 hover:bg-gray-700 hover:text-white",
@@ -144,7 +160,7 @@ export default function AdminPanel() {
             {/* Replace with your content */}
             <div className="px-4 py-6 sm:px-0">
               <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 bg-gray-100">
-                {showItemList && <CourseList />}
+                {showCourseList && <CourseList showCourseListFunc={showCourseListFunc} />}
                 {showUserList && <h1>USER LIST</h1>}
                 {showOrderList && <h1>ORDER LIST</h1>}
                 {showAnalytics && <h1>ANALYTICS</h1>}
