@@ -7,6 +7,8 @@ import CourseList from '../CourseList'
 import UserList from '../UserList'
 import OrderList from '../OrderList'
 import Analytics from '../Analytics'
+import MailList from '../MailList'
+import Logo from '../../Logo.svg'
 
 
 
@@ -20,6 +22,7 @@ export default function AdminPanel() {
   const [showUserList, setShowUserList] = useState(false)
   const [showOrderList, setShowOrderList] = useState(false)
   const [showAnalytics, setShowAnalytics] = useState(true)
+  const [showMailList, setShowMailList] = useState(false)
 
   const navigation = [
     { name: "Site", onClick: () => navigate("/") },
@@ -39,6 +42,10 @@ export default function AdminPanel() {
       showUserListFunc()
    
   } },
+    { name: "Mail List", onClick:  () => {
+      showMailListFunc()
+    } },
+
      
   ]
     const disptach = useDispatch()
@@ -53,6 +60,12 @@ export default function AdminPanel() {
       setShowUserList(false)
       setShowOrderList(false)
       setShowAnalytics(false)
+      setShowMailList(false)
+    }
+
+    const showMailListFunc = () => {
+      setAllFalse()
+      setShowMailList(true)
     }
 
     const showCourseListFunc = () => {
@@ -85,7 +98,7 @@ export default function AdminPanel() {
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img className="h-8 w-8" src="" alt="" />
+                      <img className="h-8 w-8" src={Logo} alt="" />
                     </div>
                     <div className="hidden md:block ">
                       <div className="ml-10 flex items-baseline space-x-4 ">
@@ -95,11 +108,9 @@ export default function AdminPanel() {
                             onClick={item.onClick}
                             id={item.name}
                             className={classNames(
-                            
-                                 "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              "text-gray-300 hover:bg-gray-700 hover:text-white",
                               "px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
                             )}
-                           
                           >
                             {item.name}
                           </div>
@@ -109,8 +120,6 @@ export default function AdminPanel() {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                     
-
                       {/* Profile dropdown */}
                     </div>
                   </div>
@@ -120,7 +129,10 @@ export default function AdminPanel() {
                       <span className="sr-only">Open main menu</span>
                     </Disclosure.Button>
                   </div>
-                  <button onClick={logoutHandler} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-auto">
+                  <button
+                    onClick={logoutHandler}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-auto"
+                  >
                     Log out
                   </button>
                 </div>
@@ -130,7 +142,6 @@ export default function AdminPanel() {
                 <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
-                     
                       key={item.name}
                       as="a"
                       href={item.href}
@@ -161,12 +172,15 @@ export default function AdminPanel() {
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             {/* Replace with your content */}
-            <div className="px-4 py-6 sm:px-0">
-              <div className=" h-fit rounded-lg border-4 border-dashed border-gray-200 bg-gray-100">
-                {showCourseList && <CourseList showCourseListFunc={showCourseListFunc} />}
+            <div className="px-4 py-6 sm:px-0  ">
+              <div className=" items-center min-w-fit h-fit =rounded-lg border-4 border-dashed border-gray-200 bg-gray-100">
+                {showCourseList && (
+                  <CourseList showCourseListFunc={showCourseListFunc} />
+                )}
                 {showUserList && <UserList />}
                 {showOrderList && <OrderList />}
                 {showAnalytics && <Analytics />}
+                {showMailList && <MailList />}
               </div>
             </div>
             {/* /End replace */}

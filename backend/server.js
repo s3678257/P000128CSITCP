@@ -8,6 +8,7 @@ import userRoutes from "./routes/userRoutes.js"
 import courseRoutes from "./routes/courseRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
 import uploadRoutes from "./routes/uploadRoutes.js"
+import emailRoutes from "./routes/emailRoutes.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
 import { addCount,getCount } from "./controllers/visitorController.js"
 
@@ -29,6 +30,7 @@ app.use("/orders", orderRoutes)
 app.use("/uploads", uploadRoutes)
 app.use("/api/visitors", addCount)
 app.use("/api/count", getCount)
+app.use("/email", emailRoutes)
 
 const __dirname = path.resolve()
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")))

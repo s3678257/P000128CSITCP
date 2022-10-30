@@ -57,7 +57,7 @@ export default function Courses() {
                 <div className="flex-1 flex flex-col justify-end">
                  
                   <p className="text-base font-medium text-gray-900">
-                    {course.price}
+                    ${course.price}
                   </p>
                 </div>
               </div>

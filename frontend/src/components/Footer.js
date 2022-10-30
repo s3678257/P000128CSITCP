@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom"
 
 const navigation = {
   main: [
-    { name: "About", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Courses", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "About", href: "/about" },
    
-    { name: "Partners", href: "#" },
+    { name: "Courses", href: "/courses" },
+    { name: "Contact", href: "/contact" },
+   
+    
   ],
   social: [
     {
@@ -70,14 +71,14 @@ export default function Footer() {
         </nav>
         <div className="mt-8 flex justify-center space-x-6">
           {navigation.social.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className="text-gray-400 hover:text-gray-500"
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
-            </a>
+            </Link>
           ))}
         </div>
         <p className="mt-8 text-center text-base text-gray-400">

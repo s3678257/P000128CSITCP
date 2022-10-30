@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react"
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react"
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline"
-import {Logo } from "../Logo"
+import Logo from "../../Logo.svg"
 
 
 import { Link, useNavigate } from "react-router-dom"
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../../actions/userActions"
 import { removeFromCart } from "../../actions/cartActions"
 
-const currencies = ["CAD", "USD", "AUD"]
+const currencies = [ "AUD"]
 
 const navigation = {
   pages: [{ name: "About" }, { name: "Courses" }, { name: "Contact" }],
@@ -263,7 +263,7 @@ export default function Navbar() {
                                         <h3>
                                           <a href={item.href}>{item.name}</a>
                                         </h3>
-                                        <p className="ml-4">{item.price}</p>
+                                        <p className="ml-4">${item.price}</p>
                                       </div>
                                       <p className="mt-1 text-sm text-gray-500">
                                         {item.description}
@@ -278,7 +278,7 @@ export default function Navbar() {
                                             )
                                           }
                                           type="button"
-                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                          className="font-medium text-red-600 hover:text-red-500"
                                         >
                                           Remove
                                         </button>

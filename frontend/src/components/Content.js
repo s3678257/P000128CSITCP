@@ -40,7 +40,7 @@ export default function Content() {
                   <img
                     className="rounded-lg shadow-lg object-cover object-center"
                     src={img2}
-                    alt="professional picture of Jennifer"
+                    alt="jen"
                     width={1184} 
                     height={1376}
                   />

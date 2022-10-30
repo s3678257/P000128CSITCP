@@ -1,46 +1,48 @@
 
 import { CheckIcon } from "@heroicons/react/outline"
-
+import {Link} from "react-router-dom"
 const pricing = {
   tiers: [
     {
-      title: "FreelancerIntroduction to Superconscious Teens ",
+      title: "Freelancer Introduction to Superconscious Teens ",
       price: 200,
       frequency: "4 weeks",
-      description: "Lorem ipsum ",
+      description: "",
       features: [
-        "Sagittis scelerisque nulla cursus",
-        "Laoreet sem estphasellus eu proin massa",
-        "scelerisque nulla cursus",
-        "Mi a platea auctor mi.",
+        "30 min. live session every Monday to review goals for the week.",
+        "Total of 24 recorded sessions. 12 one hour for moms & 12 thirty min. for teens",
+        "Access to a private Facebook group for moms and teens",
       ],
       cta: "Join Now",
       mostPopular: false,
     },
     {
-      title: "Master the tools & skills to become ST&M ",
+      title: "6 ",
       price: 600,
       frequency: "12 weeks",
-      description: "Lorem ipsum ",
+      description: " ",
       features: [
         "30 min. live session every Monday to review goals for the week.",
         "Total of 24 recorded sessions. 12 one hour for moms & 12 thirty min. for teens",
         "Worksheets to guide you and your teen through the creation process.",
         "Recorded semi- personalized visualizations, meditations and transformation tools.",
+        "Access to a private Facebook group for moms and teens",
       ],
       cta: "Join Now",
       mostPopular: true,
     },
     {
-      title: "Work one on one to loream ipsum edent ",
+      title: "Full Package Edition ",
       price: 3000,
       frequency: "12 weeks",
-      description: "Lorem ipsum ",
+      description: "",
       features: [
-        "Sagittis scelerisque nulla cursus",
-        "Laoreet sem estphasellus eu proin massa",
-        "scelerisque nulla cursus",
-        "Mi a platea auctor mi.",
+        "30 min. live session every Monday to review goals for the week.",
+        "Total of 24 recorded sessions. 12 one hour for moms & 12 thirty min. for teens",
+        "Worksheets to guide you and your teen through the creation process.",
+        "Recorded FULLY personalized visualizations, meditations and transformation tools.",
+        "Free VIP ticket to our international conference at the end of the year",
+        "Access to a private Facebook group for moms and teens",
       ],
       cta: "Join Now",
       mostPopular: false,
@@ -102,8 +104,8 @@ export default function Pricing() {
               </ul>
             </div>
 
-            <a
-              href="#"
+            <Link
+              to="/courses"
               className={classNames(
                 tier.mostPopular
                   ? "bg-gray-900 text-white hover:bg-gray-900"
@@ -112,7 +114,7 @@ export default function Pricing() {
               )}
             >
               {tier.cta}
-            </a>
+            </Link>
           </div>
         ))}
       </div>
