@@ -22,14 +22,14 @@ import {
 export const courseListReducer = (state = { courses: [] }, action) => {
   switch (action.type) {
     case COURSE_LIST_REQUEST:
-      return {  courses: [] }
+      return { courses: [] }
     case COURSE_LIST_SUCCESS:
       return {
         loading: false,
         courses: action.payload.courses,
       }
     case COURSE_LIST_FAIL:
-      return {  error: action.payload }
+      return { error: action.payload }
     default:
       return state
   }

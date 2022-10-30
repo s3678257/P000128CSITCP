@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useRef, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import axios from "axios"
 
@@ -6,9 +6,8 @@ export default function UserCreateModal(props) {
   const [open, setOpen] = useState(true)
   const name = useRef()
   const email = useRef()
-    const password = useRef()
+  const password = useRef()
   const isAdmin = useRef()
-
 
   //update course
   axios.defaults.baseURL = "http://localhost:8000"
@@ -25,7 +24,6 @@ export default function UserCreateModal(props) {
         password: password.current.value,
         email: email.current.value,
         isAdmin: isAdmin.current.value,
-      
       })
       .then((res) => {
         console.log(res.data)
@@ -33,12 +31,10 @@ export default function UserCreateModal(props) {
         //close modal
         setOpen(false)
       })
-     .catch((err) => {
-            console.log(err)
-        })
+      .catch((err) => {
+        console.log(err)
+      })
   }
-
-
 
   return (
     <Transition.Root show={open} as={Fragment}>

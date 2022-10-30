@@ -2,39 +2,29 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { useSelector } from "react-redux"
 
-
-
-const MyOrders = (props) => {
+const MyOrders = () => {
   //get all orders
   const [orders, setOrders] = useState([])
-  
-   const userLogin = useSelector((state) => state.userLogin)
-   const { userInfo } = userLogin
 
-   const id  = userInfo._id
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const id = userInfo._id
 
   axios.defaults.baseURL = "http://localhost:8000"
   useEffect(() => {
     //get all orders of the user with the route /orders/myorders parsing in the user id as body
     axios
-        .get(`/orders/myorders/${id}` )
-        .then((res) => {
-            console.log(id)
-            console.log(res.data)
-            setOrders(res.data)
-            }
-        )
-        .catch((err) => {
-            console.log(err)
-        }
-        )
-
-   
-  }, [ id])
-
-
-
-
+      .get(`/orders/myorders/${id}`)
+      .then((res) => {
+        console.log(id)
+        console.log(res.data)
+        setOrders(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [id])
 
   return (
     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
@@ -96,8 +86,7 @@ const MyOrders = (props) => {
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               {order.orderItems.map((item, idx) => (
                                 //show first item idx and collapse the rest
-                                
-                                
+
                                 <div key={item._id}>{item.name}</div>
                               ))}
                             </td>

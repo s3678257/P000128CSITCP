@@ -1,13 +1,13 @@
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useRef, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import axios from "axios"
 
 export default function UserEdit(props) {
   const [open, setOpen] = useState(true)
-    const name = useRef()
-    const email = useRef()
-    const password = useRef()
-    const isAdmin = useRef()
+  const name = useRef()
+  const email = useRef()
+  const password = useRef()
+  const isAdmin = useRef()
 
   const cancelButtonRef = useRef(null)
 
@@ -28,7 +28,6 @@ export default function UserEdit(props) {
         email: email.current.value || user.email,
         password: password.current.value || user.password,
         isAdmin: isAdmin.current.value || user.isAdmin,
-        
       })
       .then((res) => {
         console.log(res.data)
@@ -38,7 +37,6 @@ export default function UserEdit(props) {
       })
       .catch((err) => console.log(err))
   }
-
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -98,10 +96,7 @@ export default function UserEdit(props) {
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                               placeholder={user.name}
                             />
-                            <label
-                         
-                              className="block text-sm font-medium text-gray-700"
-                            >
+                            <label className="block text-sm font-medium text-gray-700">
                               Email
                             </label>
                             <input
@@ -110,10 +105,7 @@ export default function UserEdit(props) {
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                               placeholder={user.email}
                             />
-                            <label
-                        
-                              className="block text-sm font-medium text-gray-700"
-                            >
+                            <label className="block text-sm font-medium text-gray-700">
                               Password
                             </label>
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
@@ -121,12 +113,8 @@ export default function UserEdit(props) {
                               ref={password}
                               type="password"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                             
                             />
-                            <label
-                             
-                              className="block text-sm font-medium text-gray-700"
-                            >
+                            <label className="block text-sm font-medium text-gray-700">
                               Role
                             </label>
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>

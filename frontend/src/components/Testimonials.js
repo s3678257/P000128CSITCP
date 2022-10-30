@@ -1,5 +1,5 @@
 import img4 from '../img4.jpg'
-export default function Example() {
+export default function Testimonials() {
   return (
     <div className="bg-white pt-16 lg:py-24">
       <div className="pb-16 lg:pb-0 lg:z-10 lg:relative">
@@ -14,7 +14,7 @@ export default function Example() {
                 <img
                   className="object-cover lg:h-full lg:w-full"
                   src={img4}
-                  alt="Customer picture here"
+                  alt="Customer"
                 />
               </div>
             </div>

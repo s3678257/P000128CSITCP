@@ -1,5 +1,4 @@
-import img2 from '../img2.jpg'
-
+import img2 from "../img2.jpg"
 import { CameraIcon } from "@heroicons/react/solid"
 
 export default function Content() {
@@ -27,7 +26,6 @@ export default function Content() {
               viewBox="0 0 404 384"
               aria-hidden="true"
             >
-             
               <rect
                 width={404}
                 height={384}
@@ -41,7 +39,7 @@ export default function Content() {
                     className="rounded-lg shadow-lg object-cover object-center"
                     src={img2}
                     alt="jen"
-                    width={1184} 
+                    width={1184}
                     height={1376}
                   />
                 </div>
@@ -50,7 +48,6 @@ export default function Content() {
                     className="flex-none w-5 h-5 text-gray-400"
                     aria-hidden="true"
                   />
-                  
                 </figcaption>
               </figure>
             </div>
@@ -58,65 +55,58 @@ export default function Content() {
           <div className="mt-8 lg:mt-0">
             <div className="text-base max-w-prose mx-auto lg:max-w-none">
               <p className="text-lg text-gray-500">
-              A MINDSET FOR TEENS
-              that will create healthy habits,
-              compassion, and sound relationships!
-              A complete system for you and your teen to expand, explore and enjoy together.
+                A MINDSET FOR TEENS that will create healthy habits, compassion,
+                and sound relationships! A complete system for you and your teen
+                to expand, explore and enjoy together.
               </p>
             </div>
             <div className="mt-5 prose prose-indigo text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1">
-              <p>
-              lets talk about who this is really for....
-              </p>
+              <p>lets talk about who this is really for....</p>
+              <p className="mt-1">Do you agree with these?</p>
               <p className="mt-1">
-              Do you agree with these?
+                You are frustrated by the eye-rolling and taking back and you
+                fear that that once close relationship you had is gone forever.
               </p>
-              <p className="mt-1">
-              You are frustrated by the eye-rolling and taking back and you fear 
-              that that once close relationship you had is gone forever.
-              </p>
-              
-              <p className="mt-1">
-              You wish you had better tools to support your teen through the
-              difficulties that come with adolescent relationships.
-              </p>
-              
-              <p className="mt-1">
-              You are struggling with how to guide your teen through the
-              gender fluidity converstation.
-              </p>
-              <p className="mt-1">
-              You seem to just be keeping your head above water with work,
-              household chores, quality family time, and who has time for self-care?
-              </p>
-              <p className="mt-1">
-              You fear that the unhappiness, and anxiety that your teen is
-              experiencing now will turn into something much worse.
-              </p>
-              <h4 className="mt-2">
-              What do these checks tell us?
-              </h4>
 
               <p className="mt-1">
-              You know that your teens mindset
-              is affecting them.</p>
-              <p>
-              You feel like you have already tried
-              everything.</p>
+                You wish you had better tools to support your teen through the
+                difficulties that come with adolescent relationships.
+              </p>
 
               <p className="mt-1">
-              You worry that if your teen does not
-              start to have more self-compassion &
-              confidence then they will create
-              unhealthy patterns and beliefs.</p>
+                You are struggling with how to guide your teen through the
+                gender fluidity converstation.
+              </p>
+              <p className="mt-1">
+                You seem to just be keeping your head above water with work,
+                household chores, quality family time, and who has time for
+                self-care?
+              </p>
+              <p className="mt-1">
+                You fear that the unhappiness, and anxiety that your teen is
+                experiencing now will turn into something much worse.
+              </p>
+              <h4 className="mt-2">What do these checks tell us?</h4>
 
               <p className="mt-1">
-              You need a system to guide yourself
-              and your teen to connect on a deep
-              level and enjoy these remaining
-              years at home.</p>
+                You know that your teens mindset is affecting them.
+              </p>
+              <p>You feel like you have already tried everything.</p>
 
-              <p className='mt-3'>You need to subscribe to our courses now! ! !</p>
+              <p className="mt-1">
+                You worry that if your teen does not start to have more
+                self-compassion & confidence then they will create unhealthy
+                patterns and beliefs.
+              </p>
+
+              <p className="mt-1">
+                You need a system to guide yourself and your teen to connect on
+                a deep level and enjoy these remaining years at home.
+              </p>
+
+              <p className="mt-3">
+                You need to subscribe to our courses now! ! !
+              </p>
             </div>
           </div>
         </div>

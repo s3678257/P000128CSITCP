@@ -1,10 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
-
-
-
 
 export default function Courses() {
   const navigate = useNavigate()
@@ -13,19 +9,15 @@ export default function Courses() {
   axios.defaults.baseURL = "http://localhost:8000"
 
   useEffect(() => {
-    
-    axios.get("/courses").then((res) => {
-      setCourses(res.data)
-     
-    }).catch((err) => {
-      console.log(err)
-    }
-    )
+    axios
+      .get("/courses")
+      .then((res) => {
+        setCourses(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }, [courses])
-
-
-
-
 
   return (
     <div className="bg-white">
@@ -37,7 +29,7 @@ export default function Courses() {
             <div
               key={course._id}
               className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden cursor-pointer"
-              onClick={ () => navigate(`/courses/${course._id}`)}
+              onClick={() => navigate(`/courses/${course._id}`)}
             >
               <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
                 <img
@@ -55,7 +47,6 @@ export default function Courses() {
                 </h3>
                 <p className="text-sm text-gray-500">{course.description}</p>
                 <div className="flex-1 flex flex-col justify-end">
-                 
                   <p className="text-base font-medium text-gray-900">
                     ${course.price}
                   </p>

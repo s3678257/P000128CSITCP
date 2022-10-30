@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useRef, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import axios from "axios"
 
@@ -9,8 +9,6 @@ export default function CourseCreateModal(props) {
   const price = useRef()
   const [image, setImage] = useState("")
 
-
-
   //update course
   axios.defaults.baseURL = "http://localhost:8000"
 
@@ -19,51 +17,46 @@ export default function CourseCreateModal(props) {
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`
-    
+
     axios
-        .post(`/courses`, {
-            name: name.current.value,
-            description: description.current.value,
-            price: price.current.value,
-            //if image is not uploaded, set it to null
-            image: image ? image : null,
-        })
-        .then((res) => {
-            console.log(res.data)
-            props.refreshTable()
-            //close modal
-            setOpen(false)
-        }
-        )
+      .post(`/courses`, {
+        name: name.current.value,
+        description: description.current.value,
+        price: price.current.value,
+        //if image is not uploaded, set it to null
+        image: image ? image : null,
+      })
+      .then((res) => {
+        console.log(res.data)
+        props.refreshTable()
+        //close modal
+        setOpen(false)
+      })
   }
 
-   const uploadFileHandler = async (e) => {
-     const file = e.target.files[0]
-     //check if file is image
-     if (file.type.split("/")[0] !== "image") {
-       e.target.value = ""
-       return alert("only image files are allowed")
-     } else {
-       const formData = new FormData()
-       formData.append("image", file)
-    
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    //check if file is image
+    if (file.type.split("/")[0] !== "image") {
+      e.target.value = ""
+      return alert("only image files are allowed")
+    } else {
+      const formData = new FormData()
+      formData.append("image", file)
 
-       try {
-         const config = {
-           headers: {
-             "Content-Type": "multipart/form-data",
-           },
-         }
-         const { data } = await axios.post("/uploads", formData, config)
-         setImage(data)
-       
-       } catch (error) {
-         console.error(error)
-   
-       }
-     }
-   }
-
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+        const { data } = await axios.post("/uploads", formData, config)
+        setImage(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>

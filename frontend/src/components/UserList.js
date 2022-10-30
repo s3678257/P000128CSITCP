@@ -3,7 +3,7 @@ import axios from "axios"
 import UserEdit from "./UserEdit"
 import DeleteModal from "./DeleteModal"
 import UserCreateModal from "./UserCreateModal"
-const CourseList = (props) => {
+const CourseList = () => {
   const [userEdit, setUserEdit ] = useState(false)
   const [createUserModal, setCreateUserModal] = useState(false)
   //get all courses

@@ -4,7 +4,6 @@ import axios from "axios"
 import DeleteModal from "./DeleteModal"
 
 const OrderList = (props) => {
-
   //get all orders
   const [orders, setOrders] = useState([])
   const [id, setId] = useState("")
@@ -23,7 +22,6 @@ const OrderList = (props) => {
         console.log(err)
       })
   }, [])
-
 
   const setDeleteModalFalse = () => {
     setDeleteModal(false)
@@ -91,7 +89,7 @@ const OrderList = (props) => {
                     >
                       User
                     </th>
-                   
+
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -105,7 +103,6 @@ const OrderList = (props) => {
                       Ordered At
                     </th>
 
-            
                     <th scope="col" className="relative px-6 py-3">
                       <span className="sr-only">Delete</span>
                     </th>
@@ -117,7 +114,6 @@ const OrderList = (props) => {
                       key={order._id}
                       className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
                     >
-                    
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {order._id}
                       </td>
@@ -128,11 +124,11 @@ const OrderList = (props) => {
                         {order.totalPrice}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {//convert date to string then substring(0, 10)
-                        order.createdAt.toString().substring(0, 10)}
+                        {
+                          //convert date to string then substring(0, 10)
+                          order.createdAt.toString().substring(0, 10)
+                        }
                       </td>
-
-                    
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
@@ -145,7 +141,6 @@ const OrderList = (props) => {
                           Delete
                         </button>
                       </td>
-                      
                     </tr>
                   ))}
                 </tbody>

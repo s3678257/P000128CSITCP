@@ -1,6 +1,5 @@
-
 import { CheckIcon } from "@heroicons/react/outline"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 const pricing = {
   tiers: [
     {
@@ -61,7 +60,7 @@ export default function Pricing() {
         Let me help you
       </h2>
       <p className="mt-6 max-w-2xl text-xl text-gray-500">
-      We offer different kinds of course options
+        We offer different kinds of course options
       </p>
 
       {/* Tiers */}

@@ -3,7 +3,7 @@ import axios from "axios"
 import CourseEdit from "./CourseEdit"
 import CourseCreateModal from "./CourseCreateModal"
 import DeleteModal from "./DeleteModal"
-const CourseList = (props) => {
+const CourseList = () => {
   const [courseEdit, setCourseEdit] = useState(false)
   const [createCourseModal, setCreateCourseModal] = useState(false)
   //get all courses
@@ -27,7 +27,7 @@ const CourseList = (props) => {
   const setCourseEditFalse = () => {
     setCourseEdit(false)
   }
-  const setCourseCreateFalse =() => {
+  const setCourseCreateFalse = () => {
     setCreateCourseModal(false)
   }
   const setDeleteModalFalse = () => {
@@ -48,7 +48,6 @@ const CourseList = (props) => {
 
   //delete courseItem
   const deleteCourse = () => {
- 
     //add token to header
     axios.defaults.headers.common[
       "Authorization"
@@ -64,7 +63,6 @@ const CourseList = (props) => {
         console.log(err)
       })
   }
-
 
   return (
     <div className="m-8">

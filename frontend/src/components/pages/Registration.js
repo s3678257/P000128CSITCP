@@ -10,8 +10,6 @@ export default function Registration() {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
-
- 
     const location = useLocation()
     const dispatch = useDispatch()
     const navigate = useNavigate()

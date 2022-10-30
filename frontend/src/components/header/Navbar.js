@@ -3,13 +3,12 @@ import { Dialog, Popover, Tab, Transition } from "@headlessui/react"
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline"
 import Logo from "../../Logo.svg"
 
-
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../../actions/userActions"
 import { removeFromCart } from "../../actions/cartActions"
 
-const currencies = [ "AUD"]
+const currencies = ["AUD"]
 
 const navigation = {
   pages: [{ name: "About" }, { name: "Courses" }, { name: "Contact" }],
@@ -21,7 +20,7 @@ export default function Navbar() {
 
   const [isAdmin, setIsAdmin] = useState(false)
   const dispatch = useDispatch()
-  
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const navigate = useNavigate()
@@ -41,13 +40,11 @@ export default function Navbar() {
     dispatch(logout())
     navigate("/")
     //remove all items from cart
-    
+
     cartItems.map((item) => {
       dispatch(removeFromCart(item.course))
-    }) 
+    })
   }
-
-
 
   const removeItemFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -61,14 +58,12 @@ export default function Navbar() {
     //if user is not logged in, redirect to login page and redirect back to checkout once logged in
     if (!userInfo) {
       navigate("/signin?redirect=checkout")
-       setCartOpen(false)
+      setCartOpen(false)
     } else {
       navigate("/checkout")
-       setCartOpen(false)
+      setCartOpen(false)
     }
-   
   }
-
 
   return (
     <div className="bg-white">
@@ -243,10 +238,7 @@ export default function Navbar() {
 
                         <div className="mt-8">
                           <div className="flow-root">
-                            <ul
-                              role="list"
-                              className="-my-6 divide-y divide-gray-200"
-                            >
+                            <ul className="-my-6 divide-y divide-gray-200">
                               {cartItems.map((item) => (
                                 <li key={item.course} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -380,7 +372,6 @@ export default function Navbar() {
               </form>
 
               <div className="flex items-center space-x-6">
-
                 {userInfo ? (
                   <>
                     {isAdmin ? (
@@ -428,7 +419,6 @@ export default function Navbar() {
                     </Link>
                   </>
                 )}
-
               </div>
             </div>
           </div>
@@ -442,11 +432,7 @@ export default function Navbar() {
                   <div className="hidden lg:flex-1 lg:flex lg:items-center">
                     <Link to="/">
                       <span className="sr-only">Workflow</span>
-                      <img
-                        className="h-20 w-auto"
-                        src={Logo}
-                        alt=""
-                      />
+                      <img className="h-20 w-auto" src={Logo} alt="" />
                     </Link>
                   </div>
 
@@ -482,11 +468,7 @@ export default function Navbar() {
                   {/* Logo (lg-) 此处更换移动端Logo*/}
                   <Link to="/" className="lg:hidden">
                     <span className="sr-only">Workflow</span>
-                    <img
-                      src={Logo}
-                      alt=""
-                      className="h-20 w-auto"
-                    />
+                    <img src={Logo} alt="" className="h-20 w-auto" />
                   </Link>
 
                   <div className="flex-1 flex items-center justify-end">

@@ -4,20 +4,14 @@ import axios from "axios"
 import { addToCart } from "../../actions/cartActions"
 import { useDispatch } from "react-redux"
 
-
-
-
 const CourseDetails = () => {
-  
   const dispatch = useDispatch()
-  
+
   //get url
   const location = useLocation()
   const course_id = location.pathname.split("/")[2]
   const [courseDetails, setCourseDetails] = useState({})
   //get course details
-
-
 
   useEffect(() => {
     axios.defaults.baseURL = "http://localhost:8000"
@@ -32,11 +26,10 @@ const CourseDetails = () => {
   }, [course_id])
 
   const addToCartHandler = () => {
-      dispatch(addToCart(course_id))
-      //find element with shopping-cart-button id and click
-      document.getElementById("shopping-cart-button").click()
+    dispatch(addToCart(course_id))
+    //find element with shopping-cart-button id and click
+    document.getElementById("shopping-cart-button").click()
   }
-
 
   return (
     <div className="bg-white">
@@ -49,7 +42,7 @@ const CourseDetails = () => {
                   {courseDetails.name}
                 </h1>
                 <p className="text-xl font-medium text-gray-900">
-                 $ {courseDetails.price}
+                  $ {courseDetails.price}
                 </p>
               </div>
             </div>
@@ -59,27 +52,24 @@ const CourseDetails = () => {
               <h2 className="sr-only">Images</h2>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-">
-                {courseDetails.image &&
+                {courseDetails.image && (
                   <img
-                 
-                    src={ courseDetails.image}
+                    src={courseDetails.image}
                     alt="im"
                     className="lg:col-span-2 lg:row-span-2 h-full w-full object-cover rounded-lg"
                   />
-                }
+                )}
               </div>
             </div>
 
             <div className="mt-8 lg:col-span-5">
-            
-                <button
+              <button
                 onClick={addToCartHandler}
-                  type="submit"
-                  className="mt-8 w-full bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                >
-                  Add to cart
-                </button>
-         
+                type="submit"
+                className="mt-8 w-full bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                Add to cart
+              </button>
 
               {/* courseDetails details */}
               <div className="mt-10">
@@ -94,8 +84,6 @@ const CourseDetails = () => {
                   }}
                 />
               </div>
-
-              
             </div>
           </div>
         </div>
