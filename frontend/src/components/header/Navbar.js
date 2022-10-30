@@ -34,6 +34,12 @@ export default function Navbar() {
 
   const logoutHandler = () => {
     dispatch(logout())
+    navigate("/")
+    //remove all items from cart
+    
+    cartItems.map((item) => {
+      dispatch(removeFromCart(item.course))
+    }) 
   }
 
 

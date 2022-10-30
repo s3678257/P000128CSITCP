@@ -9,6 +9,7 @@ import courseRoutes from "./routes/courseRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
 import uploadRoutes from "./routes/uploadRoutes.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
+import { addCount,getCount } from "./controllers/visitorController.js"
 
 
 dotenv.config()
@@ -16,7 +17,7 @@ dotenv.config()
 connectDB()
 
 const app = express()   
-
+const countApp = express()
 
 app.use(cors())
 app.use(express.json())
@@ -26,7 +27,8 @@ app.use("/users", userRoutes)
 app.use("/courses", courseRoutes)
 app.use("/orders", orderRoutes)
 app.use("/uploads", uploadRoutes)
-
+app.use("/api/visitors", addCount)
+app.use("/api/count", getCount)
 
 const __dirname = path.resolve()
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
@@ -39,9 +41,12 @@ if (process.env.NODE_ENV === "production") {
   )
 } else {
   app.get("/", (req, res) => {
-    res.send("api is running...")
+   
   })
 }
+
+
+
 
 app.use(notFound)
 app.use(errorHandler)
@@ -54,3 +59,4 @@ app.listen(
     `Server running in ${process.env.NODE_ENV} on PORT ${PORT}`.yellow.bold
   )
 )
+

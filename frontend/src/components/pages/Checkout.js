@@ -66,6 +66,10 @@ export default function Checkout() {
         })
       )
       navigate("/")
+      //remove all items from cart
+        cartItems.map((item) => {
+          dispatch(removeFromCart(item.course))
+        }) 
     }
     
   }

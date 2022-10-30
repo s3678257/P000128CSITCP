@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import CourseList from '../CourseList'
 import UserList from '../UserList'
 import OrderList from '../OrderList'
+import Analytics from '../Analytics'
 
 
 
@@ -18,7 +19,7 @@ export default function AdminPanel() {
   const [showCourseList, setShowCourseList] = useState(false)
   const [showUserList, setShowUserList] = useState(false)
   const [showOrderList, setShowOrderList] = useState(false)
-  const [showAnalytics, setShowAnalytics] = useState(false)
+  const [showAnalytics, setShowAnalytics] = useState(true)
 
   const navigation = [
     { name: "Site", onClick: () => navigate("/") },
@@ -165,7 +166,7 @@ export default function AdminPanel() {
                 {showCourseList && <CourseList showCourseListFunc={showCourseListFunc} />}
                 {showUserList && <UserList />}
                 {showOrderList && <OrderList />}
-                {showAnalytics && <h1>ANALYTICS</h1>}
+                {showAnalytics && <Analytics />}
               </div>
             </div>
             {/* /End replace */}

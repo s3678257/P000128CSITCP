@@ -17,7 +17,7 @@ const MyOrders = (props) => {
   useEffect(() => {
     //get all orders of the user with the route /orders/myorders parsing in the user id as body
     axios
-        .get(`/orders/myorders`, { id: id} )
+        .get(`/orders/myorders/${id}` )
         .then((res) => {
             console.log(id)
             console.log(res.data)
@@ -61,22 +61,25 @@ const MyOrders = (props) => {
                           >
                             ID
                           </th>
-                       
-
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Items
+                          </th>
                           <th
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           >
                             Amount
                           </th>
+
                           <th
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           >
                             Ordered At
                           </th>
-
-                         
                         </tr>
                       </thead>
                       <tbody>
@@ -90,7 +93,14 @@ const MyOrders = (props) => {
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                               {order._id}
                             </td>
-                        
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {order.orderItems.map((item, idx) => (
+                                //show first item idx and collapse the rest
+                                
+                                
+                                <div key={item._id}>{item.name}</div>
+                              ))}
+                            </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               {order.totalPrice}
                             </td>
@@ -100,8 +110,6 @@ const MyOrders = (props) => {
                                 order.createdAt.toString().substring(0, 10)
                               }
                             </td>
-
-                            
                           </tr>
                         ))}
                       </tbody>
