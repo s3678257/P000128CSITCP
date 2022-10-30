@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import Navbar from './Navbar'
-const Header = () => {
+const Header = (props) => {
   const [show, setShow] = useState(true)
 
   const location = useLocation()
@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <div>
 
-      {show && <Navbar />}
+      {show && <Navbar toggleCartHandler={props.toggleCartHandler} />}
         
 
     </div>

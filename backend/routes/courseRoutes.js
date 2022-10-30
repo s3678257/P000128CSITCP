@@ -1,24 +1,23 @@
 import express from "express"
 const router = express.Router()
 import {
-    getCourseProfile,
     addCourse,
-    updateCourseProfile,
     getCourses,
     deleteCourse,
     updateCourse,
+    getCourseDetail,
 } from "../controllers/courseController.js"
 import { protect, admin } from "../middleware/authMiddleware.js"
 
-router.route("/").post(addCourse).get(protect, admin, getCourses)
+router.route("/").post(addCourse).get(getCourses)
 
 router
   .route("/profile")
-  .get(protect, getCourseProfile)
-  .put(protect, updateCourseProfile)
+  .get(protect, getCourseDetail)
 router
   .route("/:id")
-  .delete(protect, admin, deleteCourse)
-  .put(protect, admin, updateCourse)
+  .delete(deleteCourse)
+  .put(updateCourse)
+  .get( getCourseDetail)
 
 export default router
