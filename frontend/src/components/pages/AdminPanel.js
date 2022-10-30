@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 import { logout } from "../../actions/userActions"
 import { Link, useNavigate } from 'react-router-dom'
 import CourseList from '../CourseList'
+import UserList from '../UserList'
+import OrderList from '../OrderList'
 
 
 
@@ -159,10 +161,10 @@ export default function AdminPanel() {
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             {/* Replace with your content */}
             <div className="px-4 py-6 sm:px-0">
-              <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 bg-gray-100">
+              <div className=" h-fit rounded-lg border-4 border-dashed border-gray-200 bg-gray-100">
                 {showCourseList && <CourseList showCourseListFunc={showCourseListFunc} />}
-                {showUserList && <h1>USER LIST</h1>}
-                {showOrderList && <h1>ORDER LIST</h1>}
+                {showUserList && <UserList />}
+                {showOrderList && <OrderList />}
                 {showAnalytics && <h1>ANALYTICS</h1>}
               </div>
             </div>

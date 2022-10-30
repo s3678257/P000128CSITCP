@@ -381,7 +381,15 @@ export default function Navbar() {
                         </Link>
                       </>
                     ) : (
-                      <> </>
+                      <>
+                        {" "}
+                        <Link
+                          to="myorders"
+                          className="text-sm font-medium text-white hover:text-gray-100"
+                        >
+                          My Orders
+                        </Link>{" "}
+                      </>
                     )}
 
                     <button

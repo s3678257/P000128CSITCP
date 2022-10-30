@@ -2,32 +2,33 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import axios from "axios"
 
-export default function CourseEdit(props) {
+export default function UserEdit(props) {
   const [open, setOpen] = useState(true)
-  const name = useRef()
-  const description = useRef()
-  const price = useRef()
-  const [image, setImage] = useState("")
+    const name = useRef()
+    const email = useRef()
+    const password = useRef()
+    const isAdmin = useRef()
+
   const cancelButtonRef = useRef(null)
 
   //get course from id
-  const [course, setCourse] = useState({ ...props.course })
+  const [user, setUser] = useState({ ...props.user })
 
   //update course
   axios.defaults.baseURL = "http://localhost:8000"
 
-  const updateCourse = () => {
+  const updateUser = () => {
     //add token to header
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`
     axios
-      .put(`/courses/${course._id}`, {
-        name: name.current.value || course.name,
-        description: description.current.value || course.description,
-        price: price.current.value || course.price,
-        //if image is not uploaded else dont change it
-        image: image ? image : course.image,
+      .put(`/users/${user._id}`, {
+        name: name.current.value || user.name,
+        email: email.current.value || user.email,
+        password: password.current.value || user.password,
+        isAdmin: isAdmin.current.value || user.isAdmin,
+        
       })
       .then((res) => {
         console.log(res.data)
@@ -38,29 +39,6 @@ export default function CourseEdit(props) {
       .catch((err) => console.log(err))
   }
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0]
-    //check if file is image
-    if (file.type.split("/")[0] !== "image") {
-      e.target.value = ""
-      return alert("only image files are allowed")
-    } else {
-      const formData = new FormData()
-      formData.append("image", file)
-
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-        const { data } = await axios.post("/uploads", formData, config)
-        setImage(data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -118,40 +96,48 @@ export default function CourseEdit(props) {
                               ref={name}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder={course.name}
+                              placeholder={user.name}
                             />
                             <label
-                              htmlFor="price"
+                         
                               className="block text-sm font-medium text-gray-700"
                             >
-                              Description
+                              Email
                             </label>
-                            <textarea
-                              ref={description}
+                            <input
+                              ref={email}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder={course.description}
+                              placeholder={user.email}
                             />
                             <label
-                              htmlFor="price"
+                        
                               className="block text-sm font-medium text-gray-700"
                             >
-                              Price
+                              Password
                             </label>
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
                             <input
-                              ref={price}
-                              type="text"
+                              ref={password}
+                              type="password"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                              placeholder={course.price}
+                             
                             />
                             <label
-                              htmlFor="price"
+                             
                               className="block text-sm font-medium text-gray-700"
                             >
-                              Image
+                              Role
                             </label>
-                            <input type="file" onChange={uploadFileHandler} />
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+
+                            <select
+                              ref={isAdmin}
+                              className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            >
+                              <option value="true">Admin</option>
+                              <option value="false">User</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -163,7 +149,7 @@ export default function CourseEdit(props) {
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => {
-                      updateCourse()
+                      updateUser()
                       props.setCourseEdit()
                       setOpen(false)
                       setOpen(true)

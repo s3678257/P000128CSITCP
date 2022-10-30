@@ -13,6 +13,7 @@ import AdminPanel from './components/pages/AdminPanel';
 import { BrowserRouter as Router } from "react-router-dom"
 import ThankYou from './components/pages/ThankYou';
 import CourseDetails from './components/pages/CourseDetails';
+import MyOrders from './components/pages/MyOrders';
 
 function App() {
   
@@ -33,6 +34,7 @@ function App() {
         <Route path='/checkout' element={<Checkout />}/>
         <Route path='/thankyou' element={<ThankYou/>}/>
         <Route path='/courses/:id' element={<CourseDetails/>}/>
+        <Route path='/myorders' element={<MyOrders/>}/>
       </Routes>
       
 
