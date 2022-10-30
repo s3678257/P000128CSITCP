@@ -1,6 +1,15 @@
 # P000128CSITCP
 
-How to run
+## Members
+* Henry Nguyen - S3560635
+* Xianlong Li - s3678257
+* Haonan Liu - s3676213
+* Linjie Zhu - s3632181
+* Junjie Zhang - s3629270
+
+* Mentor - Parag Gaikwad
+
+## How to run
 
 Setting up
 
@@ -13,9 +22,9 @@ npm install
 cd P000128CSITCP
 npm run dev
 ```
-To Access Database
+## To Access Database
 
-Set up MongoAtlas
+### Set up MongoAtlas
 
 Download Mongo Compass
 https://www.mongodb.com/try/download/compass
@@ -29,7 +38,7 @@ Your database collections will be accessable on the left panel
 <img width="1032" alt="image" src="https://user-images.githubusercontent.com/31233407/191003274-0e487c56-d566-4318-9b01-a685cc1367a3.png">
 
 
-Create your own Mongo Atlas account and URI
+## Create your own Mongo Atlas account and URI
 https://www.youtube.com/watch?v=vAHd7oV1uE0
 
 
