@@ -7,7 +7,7 @@ export default function CourseEdit(props) {
   const name = useRef()
   const description = useRef()
   const price = useRef()
-
+  const [image, setImage] = useState("")
   const cancelButtonRef = useRef(null)
 
   //get course from id
@@ -26,6 +26,8 @@ export default function CourseEdit(props) {
         name: name.current.value,
         description: description.current.value,
         price: price.current.value,
+        //if image is not uploaded else dont change it
+        image: image ? image : course.image,
       })
       .then((res) => {
         console.log(res.data)
@@ -34,6 +36,30 @@ export default function CourseEdit(props) {
         setOpen(false)
       })
       .catch((err) => console.log(err))
+  }
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    //check if file is image
+    if (file.type.split("/")[0] !== "image") {
+      e.target.value = ""
+      return alert("only image files are allowed")
+    } else {
+      const formData = new FormData()
+      formData.append("image", file)
+
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+        const { data } = await axios.post("/uploads", formData, config)
+        setImage(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 
   return (
@@ -119,6 +145,13 @@ export default function CourseEdit(props) {
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                               placeholder={course.price}
                             />
+                            <label
+                              htmlFor="price"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Image
+                            </label>
+                            <input type="file" onChange={uploadFileHandler} />
                           </div>
                         </div>
                       </div>

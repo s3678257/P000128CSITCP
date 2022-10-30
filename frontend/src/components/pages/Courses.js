@@ -41,7 +41,7 @@ export default function Courses() {
             >
               <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
                 <img
-                  src={course.imageSrc}
+                  src={course.image}
                   alt="im"
                   className="w-full h-full object-center object-cover sm:w-full sm:h-full"
                 />

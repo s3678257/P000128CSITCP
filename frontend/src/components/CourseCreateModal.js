@@ -7,7 +7,7 @@ export default function CourseCreateModal(props) {
   const name = useRef()
   const description = useRef()
   const price = useRef()
-
+  const [image, setImage] = useState("")
 
 
 
@@ -25,6 +25,8 @@ export default function CourseCreateModal(props) {
             name: name.current.value,
             description: description.current.value,
             price: price.current.value,
+            //if image is not uploaded, set it to null
+            image: image ? image : null,
         })
         .then((res) => {
             console.log(res.data)
@@ -35,14 +37,37 @@ export default function CourseCreateModal(props) {
         )
   }
 
+   const uploadFileHandler = async (e) => {
+     const file = e.target.files[0]
+     //check if file is image
+     if (file.type.split("/")[0] !== "image") {
+       e.target.value = ""
+       return alert("only image files are allowed")
+     } else {
+       const formData = new FormData()
+       formData.append("image", file)
+    
+
+       try {
+         const config = {
+           headers: {
+             "Content-Type": "multipart/form-data",
+           },
+         }
+         const { data } = await axios.post("/uploads", formData, config)
+         setImage(data)
+       
+       } catch (error) {
+         console.error(error)
+   
+       }
+     }
+   }
+
+
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-10"
-
-        onClose={setOpen}
-      >
+      <Dialog as="div" className="relative z-10" onClose={setOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -91,7 +116,6 @@ export default function CourseCreateModal(props) {
                               ref={name}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-
                             />
                             <label
                               htmlFor="price"
@@ -103,7 +127,6 @@ export default function CourseCreateModal(props) {
                               ref={description}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-
                             />
                             <label
                               htmlFor="price"
@@ -116,8 +139,14 @@ export default function CourseCreateModal(props) {
                               ref={price}
                               type="text"
                               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-
                             />
+                            <label
+                              htmlFor="price"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Image
+                            </label>
+                            <input type="file" onChange={uploadFileHandler} />
                           </div>
                         </div>
                       </div>
@@ -145,7 +174,6 @@ export default function CourseCreateModal(props) {
                       setOpen(false)
                       setOpen(true)
                     }}
-                 
                   >
                     Cancel
                   </button>
